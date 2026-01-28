@@ -54,6 +54,23 @@ def build_prompt(original_code: str) -> str:
         f"--- function definition ---\n{original_code}\n"
     )
 
+def build_code_opt_prompt(original_code: str) -> str:
+    """Build an optimization prompt using a simple on-disk template with safe token replacement.
+
+    The template must contain tokens {{LANGUAGE_NAME}}, {{SOURCE_FILENAME}}, {{BASELINE_SECONDS}},
+    and markers :::HEADER::: and :::CODE::: which will be replaced verbatim.
+    Falls back to an inline template if the file is missing.
+    """
+
+    return (
+        f"You are an expert python performance engineer.\n\n"
+        f"Task: Optimize the provided for speed while preserving exact behavior and I/O.\n"
+        f"- Do not change the function signature expected by the harness.\n"
+        f"- Provide a full replacement for this code.\n"
+        f"- Return only the code in a single fenced block.\n\n"
+        f"--- current source ---\n{original_code}\n"
+    )
+
 def llm_generate(client, model: str, prompt: str) -> str:
     completion = client.chat.completions.create(
             model=model,
@@ -68,7 +85,7 @@ def llm_generate(client, model: str, prompt: str) -> str:
     text = completion.choices[0].message.content
     return text
 
-def generate_solutions(problems: List[dict], model: str, num_completions: int) -> List[List[str]]:
+def generate_solutions(problems: List[dict], model: str, num_completions: int, baseline_codes: list[str] = []) -> List[List[str]]:
     """Generate solutions for a list of problems.
 
     Args:
@@ -90,9 +107,12 @@ def generate_solutions(problems: List[dict], model: str, num_completions: int) -
 
     start = time.time()
 
-    def process_problem(problem: dict, num_completions: int, idx: int) -> tuple[list[str], int]:
+    def process_problem(problem: dict, num_completions: int, idx: int, baseline_codes: list[str]) -> tuple[list[str], int]:
         func_defn = problem["prompt"]
-        prompt = build_prompt(func_defn)
+        if baseline_codes:
+            prompt = build_code_opt_prompt(baseline_codes[idx])
+        else:
+            prompt = build_prompt(func_defn)
         responses = []
         for _ in range(num_completions):
             response = llm_generate(client, model, prompt)
@@ -104,7 +124,7 @@ def generate_solutions(problems: List[dict], model: str, num_completions: int) -
         return responses, idx
 
     with ThreadPoolExecutor(max_workers=32) as executor:
-        futures = [executor.submit(process_problem, problem, num_completions, idx)
+        futures = [executor.submit(process_problem, problem, num_completions, idx, baseline_codes)
                    for idx, problem in enumerate(problems)]
         for future in as_completed(futures):
             solutions, idx = future.result()
@@ -143,8 +163,13 @@ def main():
     # Load enamel dataset from CSV
     dataset = load_dataset("q-rz/enamel", split="ENAMEL_HumanEval")
     problems = []
-    for obj in dataset:
+    baseline_codes = []
+    with open("samples/humaneval-canonical.json") as f:
+        d = json.load(f)
+    
+    for idx, obj in enumerate(dataset):
         problems.append(obj)
+        baseline_codes.append(d[idx][0])
 
     # Generate solutions: returns List[List[str]]
     generations = generate_solutions(problems, args.model, args.num_completions)
