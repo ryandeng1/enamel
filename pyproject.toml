@@ -1,3 +1,13 @@
-[build-system]
-requires = ["setuptools>=42"]
-build-backend = "setuptools.build_meta"
+[project]
+name = "enamel"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "datasets>=4.5.0",
+    "numpy>=2.4.1",
+    "openai>=2.16.0",
+    "pandas>=3.0.0",
+    "tqdm>=4.67.1",
+]
