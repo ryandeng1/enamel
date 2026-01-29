@@ -1,0 +1,822 @@
+[
+  [
+    "def has_close_elements(numbers: List[float], threshold: float) -> bool:\n    sorted_numbers = sorted(numbers)\n    for i in range(len(sorted_numbers) - 1):\n        if sorted_numbers[i+1] - sorted_numbers[i] < threshold:\n            return True\n    return False",
+    "def has_close_elements(numbers: List[float], threshold: float) -> bool:\n    numbers_sorted = sorted(numbers)\n    for i in range(len(numbers_sorted) - 1):\n        if numbers_sorted[i+1] - numbers_sorted[i] < threshold:\n            return True\n    return False",
+    "def has_close_elements(numbers: List[float], threshold: float) -> bool:\n    if threshold <= 0.0:\n        return False\n    sorted_nums = sorted(numbers)\n    for i in range(len(sorted_nums) - 1):\n        if sorted_nums[i+1] - sorted_nums[i] < threshold:\n            return True\n    return False"
+  ],
+  [
+    "from typing import List\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    s = paren_string.replace(\" \", \"\")\n    result = []\n    start = 0\n    balance = 0\n    for i, char in enumerate(s):\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            result.append(s[start:i+1])\n            start = i + 1\n    return result",
+    "def separate_paren_groups(paren_string: str) -> List[str]:\n    result = []\n    current = []\n    balance = 0\n    for char in paren_string:\n        if char == ' ':\n            continue\n        if char == '(':\n            balance += 1\n        else:\n            balance -= 1\n        if balance == 0:\n            result.append(''.join(current))\n            current = []\n    return result",
+    "from typing import List\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    stack = []\n    current = []\n    groups = []\n    for char in paren_string:\n        if char == ' ':\n            continue\n        if char == '(':\n            stack.append(char)\n            current.append(char)\n        elif char == ')':\n            stack.pop()\n            current.append(char)\n            if not stack:\n                groups.append(''.join(current))\n                current = []\n    return groups"
+  ],
+  [
+    "def truncate_number(number: float) -> float:\n    return number - int(number)",
+    "def truncate_number(number: float) -> float:\n    return number - int(number)",
+    "def truncate_number(number: float) -> float:\n    return number % 1"
+  ],
+  [
+    "def below_zero(operations: List[int]) -> bool:\n    balance = 0\n    for op in operations:\n        balance += op\n        if balance < 0:\n            return True\n    return False",
+    "from typing import List\n\ndef below_zero(operations: List[int]) -> bool:\n    balance = 0\n    for op in operations:\n        balance += op\n        if balance < 0:\n            return True\n    return False",
+    "def below_zero(operations: List[int]) -> bool:\n    balance = 0\n    for op in operations:\n        balance += op\n        if balance < 0:\n            return True\n    return False"
+  ],
+  [
+    "def mean_absolute_deviation(numbers: List[float]) -> float:\n    n = len(numbers)\n    mean = sum(numbers) / n\n    return sum(abs(x - mean) for x in numbers) / n",
+    "def mean_absolute_deviation(numbers: List[float]) -> float:\n    n = len(numbers)\n    total = sum(numbers)\n    return sum(abs(num - total / n) for num in numbers) / n",
+    "def mean_absolute_deviation(numbers: List[float]) -> float:\n    n = len(numbers)\n    total = sum(numbers)\n    mean = total / n\n    return sum(abs(x - mean) for x in numbers) / n"
+  ],
+  [
+    "def intersperse(numbers: List[int], delimeter: int) -> List[int]:\n    n = len(numbers)\n    return [numbers[i // 2] if i % 2 == 0 else delimeter for i in range(2 * n - 1)]",
+    "def intersperse(numbers: List[int], delimeter: int) -> List[int]:\n    n = len(numbers)\n    if n == 0:\n        return []\n    return [numbers[i // 2] if i % 2 == 0 else delimeter for i in range(2 * n - 1)]",
+    "from typing import List\n\ndef intersperse(numbers: List[int], delimeter: int) -> List[int]:\n    if not numbers:\n        return []\n    return [numbers[0]] + [delimeter, x for x in numbers[1:]]"
+  ],
+  [
+    "from typing import List\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    groups = paren_string.split()\n    result = []\n    for group in groups:\n        current = 0\n        max_depth = 0\n        for c in group:\n            if c == '(':\n                current += 1\n                if current > max_depth:\n                    max_depth = current\n            else:\n                current -= 1\n        result.append(max_depth)\n    return result",
+    "from typing import List\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    result = []\n    current_depth = 0\n    max_depth = 0\n    for char in paren_string:\n        if char == ' ':\n            result.append(max_depth)\n            current_depth = 0\n            max_depth = 0\n        elif char == '(':\n            current_depth += 1\n            if current_depth > max_depth:\n                max_depth = current_depth\n        elif char == ')':\n            current_depth -= 1\n    result.append(max_depth)\n    return result",
+    "from typing import List\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    current_depth = 0\n    max_depth = 0\n    result = []\n    for c in paren_string:\n        if c == '(':\n            current_depth += 1\n            if current_depth > max_depth:\n                max_depth = current_depth\n        elif c == ')':\n            current_depth -= 1\n        else:\n            result.append(max_depth)\n            current_depth = 0\n            max_depth = 0\n    result.append(max_depth)\n    return result"
+  ],
+  [
+    "from typing import List\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    return [s for s in strings if substring in s]",
+    "from typing import List\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    return [s for s in strings if substring in s]",
+    "def filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    if not substring:\n        return strings\n    return [s for s in strings if substring in s]"
+  ],
+  [
+    "import math\n\nfrom typing import List, Tuple\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    return (sum(numbers), math.prod(numbers))",
+    "from typing import List, Tuple\nimport math\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    >>> sum_product([])\n    (0, 1)\n    >>> sum_product([1, 2, 3, 4])\n    (10, 24)\n    \"\"\"\n    return (sum(numbers), math.prod(numbers))",
+    "def sum_product(numbers: List[int]) -> Tuple[int, int]:\n    total = 0\n    product = 1\n    for num in numbers:\n        total += num\n        product *= num\n    return (total, product)"
+  ],
+  [
+    "from typing import List, Tuple\nfrom itertools import accumulate\n\ndef rolling_max(numbers: List[int]) -> List[int]:\n    if not numbers:\n        return []\n    return list(accumulate(numbers, max, initial=numbers[0]))",
+    "from itertools import accumulate\n\ndef rolling_max(numbers: List[int]) -> List[int]:\n    return list(accumulate(numbers, max))",
+    "from typing import List\nfrom itertools import accumulate\n\ndef rolling_max(numbers: List[int]) -> List[int]:\n    if not numbers:\n        return []\n    return list(accumulate(numbers, max, initial=numbers[0]))"
+  ],
+  [
+    "def make_palindrome(string: str) -> str:\n    n = len(string)\n    for i in range(n, 0, -1):\n        left = n - i\n        right = n - 1\n        while left < right:\n            if string[left] != string[right]:\n                break\n            left += 1\n            right -= 1\n        else:\n            return string + string[:left][::-1]\n    return string",
+    "def make_palindrome(string: str) -> str:\n    n = len(string)\n    for i in range(n, 0, -1):\n        left, right = n - i, n\n        while left < right:\n            if string[left] != string[right - 1]:\n                break\n            left += 1\n            right -= 1\n        else:\n            prefix = string[:n - i]\n            return string + prefix[::-1]\n    return string",
+    "def make_palindrome(string: str) -> str:\n    n = len(string)\n    if n == 0:\n        return ''\n    for i in range(n, 0, -1):\n        is_palindrome = True\n        for j in range(i // 2):\n            if string[n - i + j] != string[n - 1 - j]:\n                is_palindrome = False\n                break\n        if is_palindrome:\n            return string + string[:n - i][::-1]\n    return string"
+  ],
+  [
+    "def string_xor(a: str, b: str) -> str:\n    return ''.join('1' if x != y else '0' for x, y in zip(a, b))",
+    "def string_xor(a: str, b: str) -> str:\n    return ''.join('1' if x != y else '0' for x, y in zip(a, b))",
+    "def string_xor(a: str, b: str) -> str:\n    return ''.join('1' if x != y else '0' for x, y in zip(a, b))"
+  ],
+  [
+    "def longest(strings: List[str]) -> Optional[str]:\n    return max(strings, key=len) if strings else None",
+    "def longest(strings: List[str]) -> Optional[str]:\n    return max(strings, key=len, default=None)",
+    "def longest(strings: List[str]) -> Optional[str]:\n    return max(strings, key=len, default=None)"
+  ],
+  [
+    "def greatest_common_divisor(a: int, b: int) -> int:\n    a = abs(a)\n    b = abs(b)\n    while b:\n        a, b = b, a % b\n    return a",
+    "def greatest_common_divisor(a: int, b: int) -> int:\n    while b:\n        a, b = b, a % b\n    return a",
+    "def greatest_common_divisor(a: int, b: int) -> int:\n    a = abs(a)\n    b = abs(b)\n    while b:\n        a, b = b, a % b\n    return a"
+  ],
+  [
+    "from typing import List\n\ndef all_prefixes(string: str) -> List[str]:\n    return [string[:i] for i in range(1, len(string) + 1)]",
+    "from typing import List\n\ndef all_prefixes(string: str) -> List[str]:\n    return [string[:i] for i in range(1, len(string) + 1)]",
+    "from typing import List\n\ndef all_prefixes(string: str) -> List[str]:\n    return [string[:i] for i in range(1, len(string) + 1)]"
+  ],
+  [
+    "def string_sequence(n: int) -> str:\n    return ' '.join(map(str, range(n+1)))",
+    "def string_sequence(n: int) -> str:\n    return ' '.join(str(i) for i in range(n + 1))",
+    "def string_sequence(n: int) -> str:\n    return ' '.join(map(str, range(n+1)))"
+  ],
+  [
+    "def count_distinct_characters(string: str) -> int:\n    return len({c.lower() for c in string})",
+    "def count_distinct_characters(string: str) -> int:\n    return len(set(string.lower()))",
+    "def count_distinct_characters(string: str) -> int:\n    return len(set(string.lower()))"
+  ],
+  [
+    "def parse_music(music_string: str) -> List[int]:\n    mapping = {'o': 4, 'o|': 2, '.|': 1}\n    return [mapping[token] for token in music_string.split()]",
+    "from typing import List\n\ndef parse_music(music_string: str) -> List[int]:\n    note_map = {'o': 4, 'o|': 2, '.|': 1}\n    return [note_map[token] for token in music_string.split()]",
+    "from typing import List\n\ndef parse_music(music_string: str) -> List[int]:\n    note_map = {'o': 4, 'o|': 2, '.|': 1}\n    return [note_map[token] for token in music_string.split()]"
+  ],
+  [
+    "def how_many_times(string: str, substring: str) -> int:\n    if not substring:\n        return 0\n    n = len(string)\n    m = len(substring)\n    if m > n:\n        return 0\n    count = 0\n    start = 0\n    while start < n:\n        pos = string.find(substring, start)\n        if pos == -1:\n            break\n        count += 1\n        start = pos + 1\n    return count",
+    "def how_many_times(string: str, substring: str) -> int:\n    n = len(string)\n    m = len(substring)\n    count = 0\n    start = 0\n    while start <= n - m:\n        pos = string.find(substring, start)\n        if pos == -1:\n            break\n        count += 1\n        start = pos + 1\n    return count",
+    "def how_many_times(string: str, substring: str) -> int:\n    n = len(string)\n    m = len(substring)\n    if m == 0:\n        return 0\n    pi = [0] * m\n    for i in range(1, m):\n        j = pi[i-1]\n        while j > 0 and substring[i] != substring[j]:\n            j = pi[j-1]\n        if substring[i] == substring[j]:\n            j += 1\n        pi[i] = j\n    count = 0\n    j = 0\n    for i in range(n):\n        while j > 0 and substring[j] != string[i]:\n            j = pi[j-1]\n        if substring[j] == string[i]:\n            j += 1\n        if j == m:\n            count += 1\n            j = pi[j-1]\n    return count"
+  ],
+  [
+    "from typing import List\n\ndef sort_numbers(numbers: str) -> str:\n    word_to_num = {\n        'zero': 0,\n        'one': 1,\n        'two': 2,\n        'three': 3,\n        'four': 4,\n        'five': 5,\n        'six': 6,\n        'seven': 7,\n        'eight': 8,\n        'nine': 9\n    }\n    return ' '.join(sorted(numbers.split(), key=lambda x: word_to_num[x]))",
+    "def sort_numbers(numbers: str) -> str:\n    word_to_num = {\n        'zero': 0,\n        'one': 1,\n        'two': 2,\n        'three': 3,\n        'four': 4,\n        'five': 5,\n        'six': 6,\n        'seven': 7,\n        'eight': 8,\n        'nine': 9\n    }\n    words = numbers.split()\n    nums = [word_to_num[w] for w in words]\n    sorted_nums = sorted(nums)\n    word_order = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']\n    return ' '.join(word_order[num] for num in sorted_nums)",
+    "from typing import List\n\ndef sort_numbers(numbers: str) -> str:\n    word_to_num = {\n        'zero': 0,\n        'one': 1,\n        'two': 2,\n        'three': 3,\n        'four': 4,\n        'five': 5,\n        'six': 6,\n        'seven': 7,\n        'eight': 8,\n        'nine': 9\n    }\n    words = numbers.split()\n    sorted_words = sorted(words, key=lambda x: word_to_num[x])\n    return ' '.join(sorted_words)"
+  ],
+  [
+    "from typing import List, Tuple\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    sorted_nums = sorted(numbers)\n    min_diff = float('inf')\n    closest_pair = (0.0, 0.0)\n    for i in range(1, len(sorted_nums)):\n        diff = sorted_nums[i] - sorted_nums[i-1]\n        if diff < min_diff:\n            min_diff = diff\n            closest_pair = (sorted_nums[i-1], sorted_nums[i])\n    return closest_pair",
+    "from typing import List, Tuple\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    sorted_numbers = sorted(numbers)\n    min_diff = float('inf')\n    closest_pair = None\n    for i in range(len(sorted_numbers) - 1):\n        diff = sorted_numbers[i+1] - sorted_numbers[i]\n        if diff < min_diff:\n            min_diff = diff\n            closest_pair = (sorted_numbers[i], sorted_numbers[i+1])\n    return closest_pair",
+    "from typing import List, Tuple\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    numbers_sorted = sorted(numbers)\n    min_diff = float('inf')\n    closest_pair = None\n    for i in range(len(numbers_sorted) - 1):\n        diff = numbers_sorted[i+1] - numbers_sorted[i]\n        if diff < min_diff:\n            min_diff = diff\n            closest_pair = (numbers_sorted[i], numbers_sorted[i+1])\n    return closest_pair"
+  ],
+  [
+    "from typing import List\n\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    min_val = min(numbers)\n    max_val = max(numbers)\n    if min_val == max_val:\n        return [0.0] * len(numbers)\n    denom = max_val - min_val\n    scale = 1.0 / denom\n    return [(x - min_val) * scale for x in numbers]",
+    "def rescale_to_unit(numbers: List[float]) -> List[float]:\n    min_val = min(numbers)\n    max_val = max(numbers)\n    return [(x - min_val) / (max_val - min_val) for x in numbers]",
+    "from typing import List\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    min_val = min(numbers)\n    max_val = max(numbers)\n    scale = 1.0 / (max_val - min_val)\n    return [(x - min_val) * scale for x in numbers]"
+  ],
+  [
+    "def filter_integers(values: List[Any]) -> List[int]:\n    return [v for v in values if type(v) == int]",
+    "def filter_integers(values: List[Any]) -> List[int]:\n    _type = type\n    return [x for x in values if _type(x) is int]",
+    "from typing import List, Any\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    return [val for val in values if isinstance(val, int)]"
+  ],
+  [
+    "def strlen(string: str) -> int:\n    return len(string)",
+    "def strlen(string: str) -> int:\n    return len(string)",
+    "def strlen(string: str) -> int:\n    return len(string)"
+  ],
+  [
+    "def largest_divisor(n: int) -> int:\n    if n % 2 == 0:\n        return n // 2\n    i = 3\n    while i * i <= n:\n        if n % i == 0:\n            return n // i\n        i += 2\n    return 1",
+    "def largest_divisor(n: int) -> int:\n    if n == 1:\n        return 0\n    if n % 2 == 0:\n        return n // 2\n    i = 3\n    while i * i <= n:\n        if n % i == 0:\n            return n // i\n        i += 2\n    return 1",
+    "def largest_divisor(n: int) -> int:\n    if n % 2 == 0:\n        return n // 2\n    i = 3\n    while i * i <= n:\n        if n % i == 0:\n            return n // i\n        i += 2\n    return 1"
+  ],
+  [
+    "from typing import List\n\n\ndef factorize(n: int) -> List[int]:\n    factors = []\n    while n % 2 == 0:\n        factors.append(2)\n        n //= 2\n    f = 3\n    while f * f <= n:\n        if n % f == 0:\n            factors.append(f)\n            n //= f\n        else:\n            f += 2\n    if n > 1:\n        factors.append(n)\n    return factors",
+    "from typing import List\n\ndef factorize(n: int) -> List[int]:\n    factors = []\n    while n % 2 == 0:\n        factors.append(2)\n        n //= 2\n    while n % 3 == 0:\n        factors.append(3)\n        n //= 3\n    f = 5\n    while f * f <= n:\n        while n % f == 0:\n            factors.append(f)\n            n //= f\n        while n % (f + 2) == 0:\n            factors.append(f + 2)\n            n //= (f + 2)\n        f += 6\n    if n > 1:\n        factors.append(n)\n    return factors",
+    "from typing import List\n\ndef factorize(n: int) -> List[int]:\n    factors = []\n    while n % 2 == 0:\n        factors.append(2)\n        n //= 2\n    i = 3\n    while i * i <= n:\n        while n % i == 0:\n            factors.append(i)\n            n //= i\n        i += 2\n    if n > 1:\n        factors.append(n)\n    return factors"
+  ],
+  [
+    "def remove_duplicates(numbers: List[int]) -> List[int]:\n    freq = {}\n    for num in numbers:\n        freq[num] = freq.get(num, 0) + 1\n    return [num for num in numbers if freq[num] == 1]",
+    "from typing import List\nfrom collections import Counter\n\ndef remove_duplicates(numbers: List[int]) -> List[int]:\n    counts = Counter(numbers)\n    return [num for num in numbers if counts[num] == 1]",
+    "from typing import List\n\ndef remove_duplicates(numbers: List[int]) -> List[int]:\n    seen = set()\n    duplicates = set()\n    for num in numbers:\n        if num in seen:\n            duplicates.add(num)\n        else:\n            seen.add(num)\n    return [num for num in numbers if num not in duplicates]"
+  ],
+  [
+    "def flip_case(string: str) -> str:\n    return string.swapcase()",
+    "def flip_case(string: str) -> str:\n    return string.swapcase()",
+    "def flip_case(string: str) -> str:\n    return string.swapcase()"
+  ],
+  [
+    "from typing import List\n\ndef concatenate(strings: List[str]) -> str:\n    return ''.join(strings)",
+    "def concatenate(strings: List[str]) -> str:\n    return ''.join(strings)",
+    "from typing import List\n\ndef concatenate(strings: List[str]) -> str:\n    return ''.join(strings)"
+  ],
+  [
+    "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    p = prefix\n    if not p:\n        return strings\n    return [s for s in strings if s.startswith(p)]",
+    "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    return [s for s in strings if s.startswith(prefix)]",
+    "def filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    prefix_len = len(prefix)\n    return [s for s in strings if len(s) >= prefix_len and s.startswith(prefix)]"
+  ],
+  [
+    "def get_positive(l: list):\n    return [x for x in l if x > 0]",
+    "def get_positive(l: list):\n    return [x for x in l if x > 0]",
+    "def get_positive(l: list):\n    return [x for x in l if x > 0]"
+  ],
+  [
+    "def is_prime(n):\n    if n < 2:\n        return False\n    if n == 2 or n == 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return False\n        i += 6\n    return True",
+    "def is_prime(n):\n    if n < 2:\n        return False\n    if n == 2 or n == 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return False\n        i += 6\n    return True",
+    "def is_prime(n):\n    if n < 2:\n        return False\n    if n == 2 or n == 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return False\n        i += 6\n    return True"
+  ],
+  [
+    "def find_zero(xs: list):\n    if len(xs) == 2:\n        return -xs[0] / xs[1]\n    \n    def evaluate(x):\n        res = 0\n        for coeff in xs:\n            res = res * x + coeff\n        return res\n    \n    a = -1.0\n    b = 1.0\n    fa = evaluate(a)\n    fb = evaluate(b)\n    \n    if fa * fb >= 0:\n        a = -2.0\n        fa = evaluate(a)\n        b = 2.0\n        fb = evaluate(b)\n        if fa * fb >= 0:\n            a = -10.0\n            b = 10.0\n            fa = evaluate(a)\n            fb = evaluate(b)\n    \n    while abs(b - a) > 1e-7:\n        c = (a + b) / 2\n        fc = evaluate(c)\n        if fa * fc < 0:\n            b = c\n            fb = fc\n        else:\n            a = c\n            fa = fc\n    return (a + b) / 2",
+    "def find_zero(xs: list):\n    n = len(xs)\n    if n == 2:\n        return -xs[0] / xs[1]\n    \n    intervals = [(-1.0, 0.0), (0.0, 1.0), (1.0, 2.0), (-2.0, -1.0)]\n    a, b = 0.0, 1.0\n    for interval in intervals:\n        a, b = interval\n        f_a = poly(xs, a)\n        f_b = poly(xs, b)\n        if f_a * f_b < 0:\n            break\n    else:\n        a, b = -10.0, 10.0\n        f_a = poly(xs, a)\n        f_b = poly(xs, b)\n    \n    tolerance = 1e-10\n    while b - a > tolerance:\n        c = (a + b) / 2.0\n        f_c = poly(xs, c)\n        if f_c == 0:\n            return c\n        if f_a * f_c < 0:\n            b = c\n            f_b = f_c\n        else:\n            a = c\n            f_a = f_c\n    return (a + b) / 2.0",
+    "def poly(xs: list, x: float):\n    result = 0.0\n    for coeff in reversed(xs):\n        result = result * x + coeff\n    return result"
+  ],
+  [
+    "def sort_third(l: list):\n    third_elements = [l[i] for i in range(0, len(l), 3)]\n    third_elements.sort()\n    return [third_elements[i // 3] if i % 3 == 0 else l[i] for i in range(len(l))]",
+    "def sort_third(l: list):\n    sorted_vals = sorted(l[i] for i in range(0, len(l), 3))\n    return [sorted_vals[i // 3] if i % 3 == 0 else l[i] for i in range(len(l))]",
+    "def sort_third(l: list):\n    sorted_vals = sorted(l[0::3])\n    return [sorted_vals[i // 3] if i % 3 == 0 else l[i] for i in range(len(l))]"
+  ],
+  [
+    "def unique(l: list):\n    return sorted(set(l))",
+    "def unique(l: list):\n    return sorted(set(l))",
+    "def unique(l: list):\n    return sorted(set(l))"
+  ],
+  [
+    "def max_element(l: list):\n    return max(l)",
+    "def max_element(l: list):\n    return max(l)",
+    "def max_element(l: list):\n    return max(l)"
+  ],
+  [
+    "def fizz_buzz(n: int):\n    return sum(str(k).count('7') for k in range(11, n, 11)) + sum(str(k).count('7') for k in range(13, n, 13)) - sum(str(k).count('7') for k in range(143, n, 143))",
+    "def fizz_buzz(n: int):\n    total = 0\n    for x in range(11, n, 11):\n        total += str(x).count('7')\n    for x in range(13, n, 13):\n        if x % 11 != 0:\n            total += str(x).count('7')\n    return total",
+    "def fizz_buzz(n: int):\n    total = 0\n    for m in range(11, n, 11):\n        total += str(m).count('7')\n    for m in range(13, n, 13):\n        total += str(m).count('7')\n    for m in range(143, n, 143):\n        total -= str(m).count('7')\n    return total"
+  ],
+  [
+    "def sort_even(l: list):\n    sorted_evens = sorted(l[0::2])\n    return [sorted_evens[i // 2] if i % 2 == 0 else l[i] for i in range(len(l))]",
+    "def sort_even(l):\n    sorted_evens = sorted([l[i] for i in range(0, len(l), 2)])\n    return [sorted_evens[i // 2] if i % 2 == 0 else l[i] for i in range(len(l))]",
+    "def sort_even(l: list):\n    evens = sorted(l[::2])\n    odds = l[1::2]\n    return [x for pair in zip(evens, odds) for x in pair] + evens[len(odds):]"
+  ],
+  [
+    "def encode_cyclic(s: str):\n    n = len(s)\n    res = []\n    for i in range(0, n, 3):\n        if i + 2 < n:\n            res.append(s[i+1])\n            res.append(s[i+2])\n            res.append(s[i])\n        else:\n            res.extend(s[i:])\n    return ''.join(res)",
+    "def encode_cyclic(s: str):\n    return ''.join(\n        (s[i+1:i+3] + s[i] if i + 3 <= len(s) else s[i:])\n        for i in range(0, len(s), 3)\n    )",
+    "def encode_cyclic(s: str):\n    n = len(s)\n    chunks = [\n        s[i+1:i+3] + s[i] if i + 3 <= n else s[i:]\n        for i in range(0, n, 3)\n    ]\n    return ''.join(chunks)"
+  ],
+  [
+    "import math\n\ndef prime_fib(n: int):\n    a, b = 0, 1\n    count = 0\n    while count < n:\n        a, b = b, a + b\n        if a > 2 and a % 2 == 0:\n            continue\n        if a == 2:\n            count += 1\n            if count == n:\n                return a\n        if a < 2:\n            continue\n        limit = math.isqrt(a)\n        i = 3\n        while i <= limit:\n            if a % i == 0:\n                break\n            i += 2\n        else:\n            count += 1\n            if count == n:\n                return a\n    return None",
+    "def prime_fib(n: int):\n    count = 0\n    a, b = 0, 1\n    def is_prime(x):\n        if x < 2:\n            return False\n        if x == 2:\n            return True\n        if x % 2 == 0:\n            return False\n        i = 3\n        while i * i <= x:\n            if x % i == 0:\n                return False\n            i += 2\n        return True\n    while count < n:\n        a, b = b, a + b\n        if a == 2:\n            count += 1\n            if count == n:\n                return a\n        elif a % 2 == 0:\n            continue\n        else:\n            if is_prime(a):\n                count += 1\n                if count == n:\n                    return a\n    return None",
+    "import math\n\ndef prime_fib(n: int):\n    count = 0\n    a, b = 0, 1\n    while count < n:\n        a, b = b, a + b\n        if a < 2:\n            continue\n        if a == 2:\n            count += 1\n            if count == n:\n                return a\n        elif a % 2 == 0:\n            continue\n        sqrt_a = math.isqrt(a)\n        i = 5\n        while i <= sqrt_a:\n            if a % i == 0 or a % (i + 2) == 0:\n                break\n            i += 6\n        else:\n            count += 1\n            if count == n:\n                return a\n    return a"
+  ],
+  [
+    "def triples_sum_to_zero(l):\n    l.sort()\n    n = len(l)\n    for i in range(n - 2):\n        if l[i] + l[i+1] + l[i+2] > 0:\n            break\n        if l[i] + l[n-2] + l[n-1] < 0:\n            continue\n        left, right = i + 1, n - 1\n        while left < right:\n            total = l[i] + l[left] + l[right]\n            if total == 0:\n                return True\n            elif total < 0:\n                left += 1\n            else:\n                right -= 1\n    return False",
+    "def triples_sum_to_zero(l: list):\n    if len(l) < 3:\n        return False\n    l.sort()\n    n = len(l)\n    for i in range(n - 2):\n        left = i + 1\n        right = n - 1\n        while left < right:\n            total = l[i] + l[left] + l[right]\n            if total == 0:\n                return True\n            elif total < 0:\n                left += 1\n            else:\n                right -= 1\n    return False",
+    "def triples_sum_to_zero(l: list):\n    n = len(l)\n    if n < 3:\n        return False\n    sorted_l = sorted(l)\n    for i in range(n - 2):\n        left = i + 1\n        right = n - 1\n        while left < right:\n            total = sorted_l[i] + sorted_l[left] + sorted_l[right]\n            if total == 0:\n                return True\n            elif total < 0:\n                left += 1\n            else:\n                right -= 1\n    return False"
+  ],
+  [
+    "def car_race_collision(n: int):\n    return n * n",
+    "def car_race_collision(n: int):\n    return n * n",
+    "def car_race_collision(n: int):\n    return n"
+  ],
+  [
+    "def incr_list(l: list):\n    return [x + 1 for x in l]",
+    "def incr_list(l: list):\n    return [x + 1 for x in l]",
+    "def incr_list(l: list):\n    return [x + 1 for x in l]"
+  ],
+  [
+    "def pairs_sum_to_zero(l):\n    seen = set()\n    for x in l:\n        if -x in seen:\n            return True\n        seen.add(x)\n    return False",
+    "def pairs_sum_to_zero(l):\n    seen = set()\n    for num in l:\n        if -num in seen:\n            return True\n        seen.add(num)\n    return False",
+    "def pairs_sum_to_zero(l):\n    seen = set()\n    for x in l:\n        if -x in seen:\n            return True\n        seen.add(x)\n    return False"
+  ],
+  [
+    "def change_base(x: int, base: int):\n    if x == 0:\n        return '0'\n    digits = []\n    while x:\n        x, r = divmod(x, base)\n        digits.append(chr(48 + r))\n    return ''.join(digits[::-1])",
+    "def change_base(x: int, base: int):\n    if x == 0:\n        return \"0\"\n    digits = []\n    while x:\n        x, r = divmod(x, base)\n        digits.append('0123456789'[r])\n    return ''.join(digits[::-1])",
+    "def change_base(x: int, base: int):\n    if x == 0:\n        return '0'\n    digits = []\n    while x:\n        digits.append(str(x % base))\n        x //= base\n    return ''.join(reversed(digits))"
+  ],
+  [
+    "def triangle_area(a, h):\n    return a * h * 0.5",
+    "def triangle_area(a, h):\n    return a * h / 2",
+    "def triangle_area(a, h):\n    return a * h / 2"
+  ],
+  [
+    "def fib4(n: int):\n    if n == 0:\n        return 0\n    if n == 1:\n        return 0\n    if n == 2:\n        return 2\n    if n == 3:\n        return 0\n    a, b, c, d = 0, 0, 2, 0\n    for _ in range(4, n + 1):\n        a, b, c, d = b, c, d, a + b + c + d\n    return d",
+    "def fib4(n: int):\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 0\n    elif n == 2:\n        return 2\n    elif n == 3:\n        return 0\n    else:\n        a, b, c, d = 0, 0, 2, 0\n        for _ in range(4, n + 1):\n            next_val = a + b + c + d\n            a, b, c, d = b, c, d, next_val\n        return next_val",
+    "def fib4(n: int):\n    if n == 0 or n == 1:\n        return 0\n    elif n == 2:\n        return 2\n    elif n == 3:\n        return 0\n    else:\n        a, b, c, d = 0, 0, 2, 0\n        for _ in range(4, n + 1):\n            a, b, c, d = b, c, d, a + b + c + d\n        return d"
+  ],
+  [
+    "def median(l: list):\n    l.sort()\n    n = len(l)\n    if n % 2 == 1:\n        return l[n // 2]\n    else:\n        return (l[n // 2 - 1] + l[n // 2]) / 2.0",
+    "def median(l):\n    l.sort()\n    n = len(l)\n    if n % 2 == 1:\n        return l[n // 2]\n    else:\n        return (l[n // 2 - 1] + l[n // 2]) / 2.0",
+    "def median(l):\n    l_sorted = sorted(l)\n    n = len(l_sorted)\n    if n % 2 == 1:\n        return l_sorted[n // 2]\n    else:\n        return (l_sorted[n // 2 - 1] + l_sorted[n // 2]) / 2.0"
+  ],
+  [
+    "def is_palindrome(text: str):\n    left, right = 0, len(text) - 1\n    while left < right:\n        if text[left] != text[right]:\n            return False\n        left += 1\n        right -= 1\n    return True",
+    "def is_palindrome(text: str):\n    left, right = 0, len(text) - 1\n    while left < right:\n        if text[left] != text[right]:\n            return False\n        left += 1\n        right -= 1\n    return True",
+    "def is_palindrome(text: str):\n    n = len(text)\n    for i in range(n // 2):\n        if text[i] != text[n - 1 - i]:\n            return False\n    return True"
+  ],
+  [
+    "def modp(n: int, p: int):\n    return pow(2, n, p)",
+    "def modp(n: int, p: int):\n    return pow(2, n, p)",
+    "def modp(n: int, p: int):\n    return pow(2, n, p)"
+  ],
+  [
+    "def encode_shift(s: str):\n    return s.translate(str.maketrans('abcdefghijklmnopqrstuvwxyz', 'fghijklmnopqrstuvwxyzabcde'))",
+    "def encode_shift(s: str):\n    a = ord('a')\n    return ''.join(chr((ord(c) + 5 - a) % 26 + a) for c in s)",
+    "def encode_shift(s: str):\n    a = ord('a')\n    return ''.join(chr((ord(ch) - a + 5) % 26 + a) for ch in s)"
+  ],
+  [
+    "def remove_vowels(text):\n    vowels = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'}\n    return ''.join(char for char in text if char not in vowels)",
+    "def remove_vowels(text):\n    vowels = set('aeiouAEIOU')\n    return ''.join(c for c in text if c not in vowels)",
+    "def remove_vowels(text):\n    vowels = set('aeiouAEIOU')\n    return ''.join(c for c in text if c not in vowels)"
+  ],
+  [
+    "def below_threshold(l: list, t: int):\n    return all(num < t for num in l)",
+    "def below_threshold(l: list, t: int):\n    return all(num < t for num in l)",
+    "def below_threshold(l: list, t: int):\n    return all(x < t for x in l)"
+  ],
+  [
+    "def add(x: int, y: int):\n    return x + y",
+    "def add(x: int, y: int):\n    return x + y",
+    "def add(x: int, y: int):\n    return x + y"
+  ],
+  [
+    "def same_chars(s0: str, s1: str):\n    return set(s0) == set(s1)",
+    "def same_chars(s0: str, s1: str):\n    if len(s0) != len(s1):\n        return False\n    count = {}\n    for c in s0:\n        count[c] = count.get(c, 0) + 1\n    for c in s1:\n        if c not in count or count[c] == 0:\n            return False\n        count[c] -= 1\n    return True",
+    "def same_chars(s0: str, s1: str):\n    if len(s0) != len(s1):\n        return False\n    count = {}\n    for c in s0:\n        count[c] = count.get(c, 0) + 1\n    for c in s1:\n        count[c] = count.get(c, 0) - 1\n        if count[c] < 0:\n            return False\n    return all(count[c] == 0 for c in count)"
+  ],
+  [
+    "def fib(n: int):\n    a, b = 0, 1\n    for _ in range(n):\n        a, b = b, a + b\n    return a",
+    "def fib(n: int):\n    a, b = 0, 1\n    for _ in range(n):\n        a, b = b, a + b\n    return a",
+    "def fib(n: int):\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b"
+  ],
+  [
+    "def correct_bracketing(brackets: str):\n    count = 0\n    for c in brackets:\n        if c == '<':\n            count += 1\n        else:\n            count -= 1\n        if count < 0:\n            return False\n    return count == 0",
+    "def correct_bracketing(brackets: str):\n    count = 0\n    for c in brackets:\n        if c == '<':\n            count += 1\n        else:\n            count -= 1\n        if count < 0:\n            return False\n    return count == 0",
+    "def correct_bracketing(brackets: str):\n    count = 0\n    for c in brackets:\n        if c == '<':\n            count += 1\n        else:\n            count -= 1\n        if count < 0:\n            return False\n    return count == 0"
+  ],
+  [
+    "def monotonic(l: list):\n    n = len(l)\n    if n <= 1:\n        return True\n    if l[1] == l[0]:\n        return False\n    inc = l[1] > l[0]\n    dec = l[1] < l[0]\n    for i in range(2, n):\n        if inc and l[i] <= l[i-1]:\n            return False\n        if dec and l[i] >= l[i-1]:\n            return False\n    return inc or dec",
+    "def monotonic(l: list):\n    n = len(l)\n    if n <= 1:\n        return True\n    is_increasing = True\n    is_decreasing = True\n    for i in range(1, n):\n        if l[i] > l[i-1]:\n            is_decreasing = False\n        elif l[i] < l[i-1]:\n            is_increasing = False\n        if not (is_increasing or is_decreasing):\n            return False\n    return is_increasing or is_decreasing",
+    "def monotonic(l: list):\n    n = len(l)\n    if n <= 1:\n        return True\n    non_decreasing = True\n    non_increasing = True\n    for i in range(1, n):\n        if l[i] < l[i-1]:\n            non_decreasing = False\n        if l[i] > l[i-1]:\n            non_increasing = False\n        if not non_decreasing and not non_increasing:\n            break\n    return non_decreasing or non_increasing"
+  ],
+  [
+    "def common(l1: list, l2: list):\n    return sorted(set(l1) & set(l2))",
+    "def common(l1: list, l2: list):\n    return sorted(set(l1) & set(l2))",
+    "def common(l1: list, l2: list):\n    return sorted(set(l1) & set(l2))"
+  ],
+  [
+    "def largest_prime_factor(n: int):\n    largest = 0\n    while n % 2 == 0:\n        largest = 2\n        n //= 2\n    f = 3\n    while f * f <= n:\n        if n % f == 0:\n            largest = f\n            n //= f\n        else:\n            f += 2\n    if n > 1:\n        largest = n\n    return largest",
+    "def largest_prime_factor(n: int):\n    max_factor = 1\n    while n % 2 == 0:\n        max_factor = 2\n        n //= 2\n    f = 3\n    while f * f <= n:\n        while n % f == 0:\n            max_factor = f\n            n //= f\n        f += 2\n    if n > 1:\n        max_factor = n\n    return max_factor",
+    "def largest_prime_factor(n: int):\n    largest = 1\n    while n % 2 == 0:\n        largest = 2\n        n //= 2\n    i = 3\n    while i * i <= n:\n        if n % i == 0:\n            largest = i\n            n //= i\n        else:\n            i += 2\n    if n > 1:\n        largest = n\n    return largest"
+  ],
+  [
+    "def sum_to_n(n: int):\n    return n * (n + 1) // 2",
+    "def sum_to_n(n: int):\n    return n * (n + 1) // 2",
+    "def sum_to_n(n: int):\n    return n * (n + 1) // 2"
+  ],
+  [
+    "def correct_bracketing(brackets: str):\n    count = 0\n    for c in brackets:\n        if c == '(':\n            count += 1\n        else:\n            count -= 1\n        if count < 0:\n            return False\n    return count == 0",
+    "def correct_bracketing(brackets: str):\n    count = 0\n    for c in brackets:\n        if c == '(':\n            count += 1\n        else:\n            count -= 1\n        if count < 0:\n            return False\n    return count == 0",
+    "def correct_bracketing(brackets: str):\n    count = 0\n    for c in brackets:\n        if c == '(':\n            count += 1\n        else:\n            count -= 1\n        if count < 0:\n            return False\n    return count == 0"
+  ],
+  [
+    "def derivative(xs: list):\n    return [(i + 1) * xs[i + 1] for i in range(len(xs) - 1)]",
+    "def derivative(xs: list):\n    return [i * xs[i] for i in range(1, len(xs))]",
+    "def derivative(xs: list):\n    return [i * xs[i] for i in range(1, len(xs))]"
+  ],
+  [
+    "def fibfib(n: int):\n    if n == 0 or n == 1:\n        return 0\n    if n == 2:\n        return 1\n    a, b, c = 0, 0, 1\n    for _ in range(3, n + 1):\n        a, b, c = b, c, a + b + c\n    return c",
+    "def fibfib(n: int):\n    if n <= 1:\n        return 0\n    if n == 2:\n        return 1\n    a, b, c = 0, 0, 1\n    for _ in range(3, n + 1):\n        a, b, c = b, c, a + b + c\n    return c",
+    "def fibfib(n: int):\n    if n <= 1:\n        return 0\n    if n == 2:\n        return 1\n    a, b, c = 0, 0, 1\n    for _ in range(3, n + 1):\n        a, b, c = b, c, a + b + c\n    return c"
+  ],
+  [
+    "def vowels_count(s):\n    s_lower = s.lower()\n    vowels = {'a', 'e', 'i', 'o', 'u'}\n    count = sum(1 for char in s_lower if char in vowels)\n    if s_lower and s_lower[-1] == 'y':\n        count += 1\n    return count",
+    "def vowels_count(s):\n    s_lower = s.lower()\n    vowels = {'a', 'e', 'i', 'o', 'u'}\n    count = sum(1 for char in s_lower if char in vowels)\n    if s_lower and s_lower[-1] == 'y':\n        count += 1\n    return count",
+    "def vowels_count(s):\n    s_lower = s.lower()\n    vowels = {'a', 'e', 'i', 'o', 'u'}\n    count = sum(1 for c in s_lower if c in vowels)\n    if s_lower and s_lower[-1] == 'y':\n        count += 1\n    return count"
+  ],
+  [
+    "def circular_shift(x, shift):\n    s = str(x)\n    n = len(s)\n    if shift > n:\n        return s[::-1]\n    else:\n        return s[-shift:] + s[:-shift]",
+    "def circular_shift(x, shift):\n    s = str(x)\n    n = len(s)\n    if shift > n:\n        return s[::-1]\n    return s[-shift:] + s[:-shift]",
+    "def circular_shift(x, shift):\n    s = str(x)\n    n = len(s)\n    if shift > n:\n        return s[::-1]\n    return s[-shift:] + s[:-shift]"
+  ],
+  [
+    "def digitSum(s):\n    return sum(ord(c) for c in s if 'A' <= c <= 'Z')",
+    "def digitSum(s):\n    return sum(ord(c) for c in s if c.isupper())",
+    "def digitSum(s):\n    return sum(ord(c) for c in s if 'A' <= c <= 'Z')"
+  ],
+  [
+    "def fruit_distribution(s, n):\n    words = s.split()\n    return n - int(words[0]) - int(words[3])",
+    "def fruit_distribution(s, n):\n    parts = s.split(' and ')\n    apples = int(parts[0].split()[0])\n    oranges = int(parts[1].split()[0])\n    return n - apples - oranges",
+    "def fruit_distribution(s, n):\n    parts = s.split()\n    return n - int(parts[0]) - int(parts[3])"
+  ],
+  [
+    "def pluck(arr):\n    if not arr:\n        return []\n    min_even = None\n    min_index = None\n    for i, x in enumerate(arr):\n        if x & 1 == 0:\n            if min_even is None or x < min_even:\n                min_even = x\n                min_index = i\n    return [min_even, min_index] if min_even is not None else []",
+    "def pluck(arr):\n    min_even = None\n    min_index = -1\n    for i, num in enumerate(arr):\n        if num % 2 == 0:\n            if min_even is None or num < min_even:\n                min_even = num\n                min_index = i\n    return [min_even, min_index] if min_even is not None else []",
+    "def pluck(arr):\n    min_even = None\n    min_index = None\n    for i, x in enumerate(arr):\n        if x % 2 == 0:\n            if min_even is None or x < min_even:\n                min_even = x\n                min_index = i\n    return [min_even, min_index] if min_even is not None else []"
+  ],
+  [
+    "def search(lst):\n    from collections import Counter\n    n = len(lst)\n    freq = Counter(lst)\n    max_val = -1\n    for num, count in freq.items():\n        if num <= n and count >= num:\n            if num > max_val:\n                max_val = num\n    return max_val",
+    "def search(lst):\n    n = len(lst)\n    freq = {}\n    for num in lst:\n        freq[num] = freq.get(num, 0) + 1\n    for x in range(n, 0, -1):\n        if x in freq and freq[x] >= x:\n            return x\n    return -1",
+    "def search(lst):\n    n = len(lst)\n    count_arr = [0] * (n + 1)\n    for num in lst:\n        if num <= n:\n            count_arr[num] += 1\n    for x in range(n, 0, -1):\n        if count_arr[x] >= x:\n            return x\n    return -1"
+  ],
+  [
+    "def strange_sort_list(lst):\n    lst_sorted = sorted(lst)\n    result = []\n    left, right = 0, len(lst_sorted) - 1\n    while left <= right:\n        result.append(lst_sorted[left])\n        left += 1\n        if left <= right:\n            result.append(lst_sorted[right])\n            right -= 1\n    return result",
+    "def strange_sort_list(lst):\n    if not lst:\n        return []\n    sorted_lst = sorted(lst)\n    left, right = 0, len(lst) - 1\n    result = []\n    while left <= right:\n        result.append(sorted_lst[left])\n        left += 1\n        if left <= right:\n            result.append(sorted_lst[right])\n            right -= 1\n    return result",
+    "def strange_sort_list(lst):\n    lst_sorted = sorted(lst)\n    left, right = 0, len(lst_sorted) - 1\n    result = []\n    while left <= right:\n        result.append(lst_sorted[left])\n        left += 1\n        if left <= right:\n            result.append(lst_sorted[right])\n            right -= 1\n    return result"
+  ],
+  [
+    "import math\n\ndef triangle_area(a, b, c):\n    if a <= 0 or b <= 0 or c <= 0:\n        return -1\n    x = min(a, b, c)\n    z = max(a, b, c)\n    y = a + b + c - x - z\n    if x + y <= z:\n        return -1\n    s = (x + y + z) / 2.0\n    area = math.sqrt(s * (s - x) * (s - y) * (s - z))\n    return round(area, 2)",
+    "import math\n\ndef triangle_area(a, b, c):\n    sides = sorted([a, b, c])\n    x, y, z = sides\n    if x + y <= z:\n        return -1\n    s = (x + y + z) / 2\n    area = math.sqrt(s * (s - x) * (s - y) * (s - z))\n    return round(area, 2)",
+    "import math\n\ndef triangle_area(a, b, c):\n    max_side = max(a, b, c)\n    if a + b + c <= 2 * max_side:\n        return -1\n    s = (a + b + c) / 2.0\n    area = math.sqrt(s * (s - a) * (s - b) * (s - c))\n    return round(area, 2)"
+  ],
+  [
+    "def will_it_fly(q, w):\n    n = len(q)\n    for i in range(n // 2):\n        if q[i] != q[n - 1 - i]:\n            return False\n    return sum(q) <= w",
+    "def will_it_fly(q, w):\n    n = len(q)\n    total = 0\n    for i in range(n // 2):\n        if q[i] != q[n - 1 - i]:\n            return False\n        total += q[i] + q[n - 1 - i]\n    if n % 2 == 1:\n        total += q[n // 2]\n    return total <= w",
+    "def will_it_fly(q, w):\n    n = len(q)\n    for i in range(n // 2):\n        if q[i] != q[n - 1 - i]:\n            return False\n    return sum(q) <= w"
+  ],
+  [
+    "def smallest_change(arr):\n    n = len(arr)\n    count = 0\n    for i in range(n // 2):\n        if arr[i] != arr[n - 1 - i]:\n            count += 1\n    return count",
+    "def smallest_change(arr):\n    n = len(arr)\n    changes = 0\n    for i in range(n // 2):\n        if arr[i] != arr[n - 1 - i]:\n            changes += 1\n    return changes",
+    "def smallest_change(arr):\n    n = len(arr)\n    changes = 0\n    for i in range(n // 2):\n        if arr[i] != arr[n - 1 - i]:\n            changes += 1\n    return changes"
+  ],
+  [
+    "def total_match(lst1, lst2):\n    total1 = sum(len(s) for s in lst1)\n    total2 = sum(len(s) for s in lst2)\n    return lst1 if total1 <= total2 else lst2",
+    "def total_match(lst1, lst2):\n    total1 = sum(len(s) for s in lst1)\n    total2 = sum(len(s) for s in lst2)\n    return lst1 if total1 <= total2 else lst2",
+    "def total_match(lst1, lst2):\n    total1 = sum(len(s) for s in lst1)\n    total2 = sum(len(s) for s in lst2)\n    return lst1 if total1 <= total2 else lst2"
+  ],
+  [
+    "def is_multiply_prime(a):\n    def is_prime(n):\n        if n < 2:\n            return False\n        if n == 2:\n            return True\n        if n % 2 == 0:\n            return False\n        i = 3\n        while i * i <= n:\n            if n % i == 0:\n                return False\n            i += 2\n        return True\n\n    if a < 8:\n        return False\n\n    p = None\n    if a % 2 == 0:\n        p = 2\n    else:\n        i = 3\n        while i * i <= a:\n            if a % i == 0:\n                p = i\n                break\n            i += 2\n\n    if p is None:\n        return False\n\n    b = a // p\n\n    if b < 4:\n        return False\n\n    if is_prime(b):\n        return False\n\n    q = None\n    if b % 2 == 0:\n        q = 2\n    else:\n        i = 3\n        while i * i <= b:\n            if b % i == 0:\n                q = i\n                break\n            i += 2\n\n    if q is None:\n        return False\n\n    r = b // q\n    return is_prime(r)",
+    "def is_multiply_prime(a):\n    if a < 8:\n        return False\n    count = 0\n    n = a\n    while n % 2 == 0:\n        count += 1\n        n //= 2\n        if count > 3:\n            return False\n    d = 3\n    while d * d <= n:\n        while n % d == 0:\n            count += 1\n            n //= d\n            if count > 3:\n                return False\n        d += 2\n    if n > 1:\n        count += 1\n        if count > 3:\n            return False\n    return count == 3",
+    "def is_multiply_prime(a):\n    if a < 8:\n        return False\n    p = None\n    for i in range(2, int(a**0.5) + 1):\n        if a % i == 0:\n            p = i\n            break\n    if p is None:\n        return False\n    b = a // p\n    q = None\n    for i in range(2, int(b**0.5) + 1):\n        if b % i == 0:\n            q = i\n            break\n    if q is None:\n        return False\n    c = b // q\n    for i in range(2, int(c**0.5) + 1):\n        if c % i == 0:\n            return False\n    return True"
+  ],
+  [
+    "def is_simple_power(x, n):\n    if x == 1:\n        return True\n    if n == 1:\n        return False\n    power = 1\n    while power < x:\n        power *= n\n        if power == x:\n            return True\n    return False",
+    "def is_simple_power(x, n):\n    if x == 1:\n        return True\n    if n == 1:\n        return False\n    if x < n:\n        return False\n    current = 1\n    while current < x:\n        current *= n\n        if current == x:\n            return True\n    return False",
+    "import math\n\ndef is_simple_power(x, n):\n    if x == 1:\n        return n != 0\n    if n == 1:\n        return False\n    if n == 0:\n        return x == 0\n    if x < n:\n        return False\n    log_val = math.log(x) / math.log(n)\n    k = round(log_val)\n    if k <= 0:\n        return False\n    return n ** int(k) == x"
+  ],
+  [
+    "def iscube(a):\n    if a == 0:\n        return True\n    b = abs(a)\n    low, high = 1, b\n    while low <= high:\n        mid = (low + high) // 2\n        mid_cubed = mid * mid * mid\n        if mid_cubed == b:\n            return True\n        elif mid_cubed < b:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return False",
+    "def iscube(a):\n    if a == 0:\n        return True\n    if a > 0:\n        n = int(round(a ** (1/3)))\n        return n**3 == a or (n-1)**3 == a\n    else:\n        a_abs = -a\n        n = int(round(a_abs ** (1/3)))\n        return n**3 == a_abs or (n-1)**3 == a_abs",
+    "def iscube(a):\n    if a == 0:\n        return True\n    if a < 0:\n        a = -a\n    low, high = 1, a\n    while low <= high:\n        mid = (low + high) // 2\n        mid3 = mid * mid * mid\n        if mid3 == a:\n            return True\n        elif mid3 < a:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return False"
+  ],
+  [
+    "def hex_key(num):\n    prime_hex = {'2', '3', '5', '7', 'B', 'D'}\n    return sum(1 for c in num if c in prime_hex)",
+    "def hex_key(num):\n    return sum(1 for c in num if c in {'2', '3', '5', '7', 'B', 'D'})",
+    "def hex_key(num):\n    prime_digits = {'2', '3', '5', '7', 'B', 'D'}\n    return sum(1 for c in num if c in prime_digits)"
+  ],
+  [
+    "def decimal_to_binary(decimal):\n    return f'db{decimal:b}db'",
+    "def decimal_to_binary(decimal):\n    return 'db' + bin(decimal)[2:] + 'db'",
+    "def decimal_to_binary(decimal):\n    return f'db{decimal:b}db'"
+  ],
+  [
+    "def is_happy(s):\n    n = len(s)\n    if n < 3:\n        return False\n    for i in range(n - 2):\n        if s[i] == s[i+1] or s[i] == s[i+2] or s[i+1] == s[i+2]:\n            return False\n    return True",
+    "def is_happy(s):\n    n = len(s)\n    if n < 3:\n        return False\n    return all(s[i] != s[i+1] and s[i] != s[i+2] and s[i+1] != s[i+2] for i in range(n-2))",
+    "def is_happy(s):\n    n = len(s)\n    if n < 3:\n        return False\n    for i in range(n - 2):\n        if s[i] == s[i+1] or s[i] == s[i+2] or s[i+1] == s[i+2]:\n            return False\n    return True"
+  ],
+  [
+    "def numerical_letter_grade(grades):\n    result = []\n    for g in grades:\n        if g == 4.0:\n            result.append('A+')\n        elif g > 3.7:\n            result.append('A')\n        elif g > 3.3:\n            result.append('A-')\n        elif g > 3.0:\n            result.append('B+')\n        elif g > 2.7:\n            result.append('B')\n        elif g > 2.3:\n            result.append('B-')\n        elif g > 2.0:\n            result.append('C+')\n        elif g > 1.7:\n            result.append('C')\n        elif g > 1.3:\n            result.append('C-')\n        elif g > 1.0:\n            result.append('D+')\n        elif g > 0.7:\n            result.append('D')\n        elif g > 0.0:\n            result.append('D-')\n        else:\n            result.append('E')\n    return result",
+    "def numerical_letter_grade(grades):\n    return [\n        'A+' if g == 4.0 else\n        'A' if g > 3.7 else\n        'A-' if g > 3.3 else\n        'B+' if g > 3.0 else\n        'B' if g > 2.7 else\n        'B-' if g > 2.3 else\n        'C+' if g > 2.0 else\n        'C' if g > 1.7 else\n        'C-' if g > 1.3 else\n        'D+' if g > 1.0 else\n        'D' if g > 0.7 else\n        'D-' if g > 0.0 else\n        'E'\n        for g in grades\n    ]",
+    "def numerical_letter_grade(grades):\n    return [\n        'A+' if g == 4.0\n        else 'A' if g > 3.7\n        else 'A-' if g > 3.3\n        else 'B+' if g > 3.0\n        else 'B' if g > 2.7\n        else 'B-' if g > 2.3\n        else 'C+' if g > 2.0\n        else 'C' if g > 1.7\n        else 'C-' if g > 1.3\n        else 'D+' if g > 1.0\n        else 'D' if g > 0.7\n        else 'D-' if g > 0.0\n        else 'E'\n        for g in grades\n    ]"
+  ],
+  [
+    "def prime_length(string):\n    n = len(string)\n    if n < 2:\n        return False\n    if n == 2:\n        return True\n    if n % 2 == 0:\n        return False\n    i = 3\n    while i * i <= n:\n        if n % i == 0:\n            return False\n        i += 2\n    return True",
+    "def prime_length(string):\n    n = len(string)\n    if n < 2:\n        return False\n    if n == 2:\n        return True\n    if n % 2 == 0:\n        return False\n    i = 3\n    while i * i <= n:\n        if n % i == 0:\n            return False\n        i += 2\n    return True",
+    "def prime_length(string):\n    n = len(string)\n    if n < 2:\n        return False\n    if n == 2:\n        return True\n    if n % 2 == 0:\n        return False\n    i = 3\n    while i * i <= n:\n        if n % i == 0:\n            return False\n        i += 2\n    return True"
+  ],
+  [
+    "def starts_one_ends(n):\n    if n == 1:\n        return 1\n    return 18 * (10 ** (n - 2))",
+    "def starts_one_ends(n):\n    if n == 1:\n        return 1\n    return 18 * (10 ** (n - 2))",
+    "def starts_one_ends(n):\n    if n == 1:\n        return 1\n    return 18 * (10 ** (n - 2))"
+  ],
+  [
+    "def solve(N):\n    return bin(sum(int(d) for d in str(N)))[2:]",
+    "def solve(N):\n    return bin(sum(int(d) for d in str(N)))[2:]",
+    "def solve(N):\n    s = sum(int(d) for d in str(N))\n    return bin(s)[2:]"
+  ],
+  [
+    "def add(lst):\n    return sum(lst[i] for i in range(1, len(lst), 2) if lst[i] & 1 == 0)",
+    "def add(lst):\n    return sum(lst[i] for i in range(1, len(lst), 2) if lst[i] & 1 == 0)",
+    "def add(lst):\n    return sum(x for i in range(1, len(lst), 2) if x & 1 == 0)"
+  ],
+  [
+    "def anti_shuffle(s):\n    words = s.split()\n    return ' '.join([''.join(sorted(word)) for word in words])",
+    "def anti_shuffle(s):\n    return ' '.join(''.join(sorted(word)) for word in s.split())",
+    "def anti_shuffle(s):\n    return ' '.join(''.join(sorted(word)) for word in s.split())"
+  ],
+  [
+    "def get_row(lst, x):\n    return [\n        (i, j)\n        for i, row in enumerate(lst)\n        for j in reversed([j for j, elem in enumerate(row) if elem == x])\n    ]",
+    "def get_row(lst, x):\n    result = []\n    for i, row in enumerate(lst):\n        for j in range(len(row) - 1, -1, -1):\n            if row[j] == x:\n                result.append((i, j))\n    return result",
+    "def get_row(lst, x):\n    res = []\n    for i, row in enumerate(lst):\n        for j in range(len(row) - 1, -1, -1):\n            if row[j] == x:\n                res.append((i, j))\n    return res"
+  ],
+  [
+    "def sort_array(array):\n    if not array:\n        return []\n    total = array[0] + array[-1]\n    if total % 2 == 1:\n        return sorted(array)\n    else:\n        return sorted(array, reverse=True)",
+    "def sort_array(array):\n    if not array:\n        return []\n    if (array[0] + array[-1]) % 2 == 1:\n        return sorted(array)\n    return sorted(array, reverse=True)",
+    "def sort_array(array):\n    if len(array) <= 1:\n        return array.copy()\n    first = array[0]\n    last = array[-1]\n    if (first % 2) != (last % 2):\n        return sorted(array)\n    else:\n        return sorted(array, reverse=True)"
+  ],
+  [
+    "def encrypt(s):\n    a = ord('a')\n    return ''.join(\n        chr((ord(c) - a + 4) % 26 + a)\n        for c in s\n    )",
+    "import string\n\ndef encrypt(s):\n    table = str.maketrans(string.ascii_lowercase, string.ascii_lowercase[4:] + string.ascii_lowercase[:4])\n    return s.translate(table)",
+    "def encrypt(s):\n    a = ord('a')\n    return ''.join(chr((ord(c) - a + 4) % 26 + a) for c in s)"
+  ],
+  [
+    "def next_smallest(lst):\n    if len(lst) < 2:\n        return None\n    smallest = None\n    second_smallest = None\n    for x in lst:\n        if smallest is None:\n            smallest = x\n        else:\n            if x < smallest:\n                second_smallest = smallest\n                smallest = x\n            elif x > smallest:\n                if second_smallest is None or x < second_smallest:\n                    second_smallest = x\n    return second_smallest if second_smallest is not None else None",
+    "def next_smallest(lst):\n    smallest = None\n    second_smallest = None\n    for x in lst:\n        if x < smallest:\n            second_smallest = smallest\n            smallest = x\n        elif x != smallest and (second_smallest is None or x < second_smallest):\n            second_smallest = x\n    return second_smallest",
+    "def next_smallest(lst):\n    min1 = None\n    min2 = None\n    for num in lst:\n        if min1 is None:\n            min1 = num\n        else:\n            if num < min1:\n                min2 = min1\n                min1 = num\n            elif num > min1 and (min2 is None or num < min2):\n                min2 = num\n    return min2 if min2 is not None else None"
+  ],
+  [
+    "def is_bored(S):\n    delimiters = {'.', '?', '!' }\n    count = 0\n    start = 0\n    n = len(S)\n    for i in range(n):\n        if S[i] in delimiters:\n            sentence = S[start:i]\n            j = 0\n            while j < len(sentence) and sentence[j].isspace():\n                j += 1\n            if j >= len(sentence):\n                continue\n            if sentence[j] == 'I':\n                if j + 1 < len(sentence) and sentence[j+1].isspace():\n                    count += 1\n                elif j + 1 == len(sentence):\n                    count += 1\n            start = i + 1\n    if start < n:\n        sentence = S[start:]\n        j = 0\n        while j < len(sentence) and sentence[j].isspace():\n            j += 1\n        if j < len(sentence) and sentence[j] == 'I':\n            if j + 1 < len(sentence) and sentence[j+1].isspace():\n                count += 1\n            elif j + 1 == len(sentence):\n                count += 1\n    return count",
+    "def is_bored(S):\n    count = 0\n    start = 0\n    n = len(S)\n    for i in range(n):\n        if S[i] in '.!?':\n            sentence = S[start:i]\n            stripped = sentence.strip()\n            if stripped and stripped[0] == 'I' and (len(stripped) == 1 or stripped[1] == ' '):\n                count += 1\n            start = i + 1\n    if start < n:\n        sentence = S[start:]\n        stripped = sentence.strip()\n        if stripped and stripped[0] == 'I' and (len(stripped) == 1 or stripped[1] == ' '):\n            count += 1\n    return count",
+    "def is_bored(S):\n    count = 0\n    start = 0\n    n = len(S)\n    for i in range(n):\n        if S[i] in '.!?':\n            sentence = S[start:i].strip()\n            if sentence and sentence.startswith('I') and (len(sentence) == 1 or sentence[1].isspace()):\n                count += 1\n            start = i + 1\n    sentence = S[start:].strip()\n    if sentence and sentence.startswith('I') and (len(sentence) == 1 or sentence[1].isspace()):\n        count += 1\n    return count"
+  ],
+  [
+    "def any_int(x, y, z):\n    if not (isinstance(x, int) and isinstance(y, int) and isinstance(z, int)):\n        return False\n    return x == y + z or y == x + z or z == x + y",
+    "def any_int(x, y, z):\n    if isinstance(x, int) and isinstance(y, int) and isinstance(z, int):\n        return x == y + z or y == x + z or z == x + y\n    return False",
+    "def any_int(x, y, z):\n    if not (isinstance(x, int) and isinstance(y, int) and isinstance(z, int)):\n        return False\n    return x == y + z or y == x + z or z == x + y"
+  ],
+  [
+    "def encode(message):\n    vowel_map = {'a': 'c', 'e': 'g', 'i': 'k', 'o': 'q', 'u': 'w'}\n    result = []\n    for char in message:\n        swapped = char.swapcase()\n        if swapped.lower() in vowel_map:\n            mapped_char = vowel_map[swapped.lower()]\n            result.append(mapped_char.upper() if swapped.isupper() else mapped_char.lower())\n        else:\n            result.append(swapped)\n    return ''.join(result)",
+    "def encode(message):\n    vowels = set(\"aeiou\")\n    shifted = {v: chr(ord(v) + 2) for v in vowels}\n    res = []\n    for c in message:\n        if c.isalpha():\n            c_swapped = c.swapcase()\n            c_lower = c_swapped.lower()\n            if c_lower in vowels:\n                shifted_char = shifted[c_lower]\n                res.append(shifted_char.upper() if c_swapped.isupper() else shifted_char)\n            else:\n                res.append(c_swapped)\n        else:\n            res.append(c)\n    return ''.join(res)",
+    "def encode(message):\n    vowel_map = {'a': 'c', 'e': 'g', 'i': 'k', 'o': 'q', 'u': 'w'}\n    result = []\n    for char in message:\n        swapped = char.swapcase()\n        if swapped.lower() in vowel_map:\n            replacement = vowel_map[swapped.lower()]\n            replacement = replacement.upper() if swapped.isupper() else replacement.lower()\n            result.append(replacement)\n        else:\n            result.append(swapped)\n    return ''.join(result)"
+  ],
+  [
+    "def skjkasdkd(lst):\n    cache = {}\n    max_prime = None\n\n    def is_prime_cached(n):\n        if n in cache:\n            return cache[n]\n        if n < 2:\n            cache[n] = False\n            return False\n        if n == 2:\n            cache[n] = True\n            return True\n        if n % 2 == 0:\n            cache[n] = False\n            return False\n        i = 3\n        while i * i <= n:\n            if n % i == 0:\n                cache[n] = False\n                return False\n            i += 2\n        cache[n] = True\n        return True\n\n    for num in lst:\n        if is_prime_cached(num):\n            if max_prime is None or num > max_prime:\n                max_prime = num\n\n    if max_prime is None:\n        return 0\n    total = 0\n    n = max_prime\n    while n:\n        total += n % 10\n        n //= 10\n    return total",
+    "def skjkasdkd(lst):\n    def is_prime(n):\n        if n < 2:\n            return False\n        if n == 2 or n == 3:\n            return True\n        if n % 2 == 0 or n % 3 == 0:\n            return False\n        i = 5\n        while i * i <= n:\n            if n % i == 0 or n % (i + 2) == 0:\n                return False\n            i += 6\n        return True\n\n    max_prime = None\n    for num in lst:\n        if is_prime(num):\n            if max_prime is None or num > max_prime:\n                max_prime = num\n\n    total = 0\n    n = max_prime\n    while n:\n        total += n % 10\n        n //= 10\n    return total",
+    "def skjkasdkd(lst):\n    prime_cache = {}\n    max_prime = None\n    for num in lst:\n        if num < 2:\n            continue\n        if num == 2:\n            if max_prime is None or num > max_prime:\n                max_prime = num\n            continue\n        if num % 2 == 0:\n            continue\n        if num in prime_cache:\n            is_prime_flag = prime_cache[num]\n        else:\n            is_prime_flag = True\n            i = 3\n            while i * i <= num:\n                if num % i == 0:\n                    is_prime_flag = False\n                    break\n                i += 2\n            prime_cache[num] = is_prime_flag\n        if is_prime_flag:\n            if max_prime is None or num > max_prime:\n                max_prime = num\n    if max_prime is None:\n        return 0\n    total = 0\n    n = max_prime\n    while n:\n        total += n % 10\n        n //= 10\n    return total"
+  ],
+  [
+    "def check_dict_case(dict):\n    if not dict:\n        return False\n    is_all_lower = True\n    is_all_upper = True\n    for key in dict:\n        if not isinstance(key, str):\n            return False\n        if key.islower():\n            is_all_upper = False\n        if key.isupper():\n            is_all_lower = False\n        if not (key.islower() or key.isupper()):\n            return False\n    return is_all_lower or is_all_upper",
+    "def check_dict_case(dict):\n    if not dict:\n        return False\n    keys = dict.keys()\n    for key in keys:\n        if not isinstance(key, str):\n            return False\n    first_key = next(iter(keys))\n    if first_key.islower():\n        return all(key.islower() for key in keys)\n    elif first_key.isupper():\n        return all(key.isupper() for key in keys)\n    else:\n        return False",
+    "def check_dict_case(dict):\n    if not dict:\n        return False\n    expected_case = None\n    for key in dict:\n        if not isinstance(key, str):\n            return False\n        if key.islower():\n            if expected_case == 'upper':\n                return False\n            expected_case = 'lower'\n        elif key.isupper():\n            if expected_case == 'lower':\n                return False\n            expected_case = 'upper'\n        else:\n            return False\n    return True"
+  ],
+  [
+    "def count_up_to(n):\n    if n < 2:\n        return []\n    sieve = [True] * n\n    sieve[0] = sieve[1] = False\n    for i in range(2, int(n**0.5) + 1):\n        if sieve[i]:\n            sieve[i*i : n : i] = [False] * len(sieve[i*i : n : i])\n    return [i for i in range(n) if sieve[i]]",
+    "def count_up_to(n):\n    if n < 2:\n        return []\n    sieve = [True] * n\n    sieve[0] = False\n    sieve[1] = False\n    sqrt_n = int(n ** 0.5)\n    for i in range(2, sqrt_n + 1):\n        if sieve[i]:\n            for j in range(i * i, n, i):\n                sieve[j] = False\n    return [i for i in range(2, n) if sieve[i]]",
+    "def count_up_to(n):\n    if n < 2:\n        return []\n    sieve = [True] * n\n    sieve[0] = False\n    sieve[1] = False\n    sqrt_n = int(n ** 0.5)\n    for i in range(2, sqrt_n + 1):\n        if sieve[i]:\n            for j in range(i * i, n, i):\n                sieve[j] = False\n    return [i for i in range(2, n) if sieve[i]]"
+  ],
+  [
+    "def multiply(a, b):\n    return (a % 10) * (b % 10)",
+    "def multiply(a, b):\n    return (a % 10) * (b % 10)",
+    "def multiply(a, b):\n    return (abs(a) % 10) * (abs(b) % 10)"
+  ],
+  [
+    "def count_upper(s):\n    vowels = {'A', 'E', 'I', 'O', 'U'}\n    return sum(1 for i in range(0, len(s), 2) if s[i] in vowels)",
+    "def count_upper(s):\n    vowels = {'A', 'E', 'I', 'O', 'U'}\n    return sum(1 for i in range(0, len(s), 2) if s[i] in vowels)",
+    "def count_upper(s):\n    vowels = {'A', 'E', 'I', 'O', 'U'}\n    return sum(1 for i in range(0, len(s), 2) if s[i] in vowels)"
+  ],
+  [
+    "def closest_integer(value):\n    num = float(value)\n    if num >= 0:\n        return int(num + 0.5)\n    else:\n        return int(num - 0.5)",
+    "def closest_integer(value):\n    x = float(value)\n    if x >= 0:\n        return int(x + 0.5)\n    else:\n        return int(x - 0.5)",
+    "def closest_integer(value):\n    x = float(value)\n    return int(x + 0.5) if x >= 0 else int(x - 0.5)"
+  ],
+  [
+    "def make_a_pile(n):\n    return [n + 2 * i for i in range(n)]",
+    "def make_a_pile(n):\n    return [n + 2 * i for i in range(n)]",
+    "def make_a_pile(n):\n    return [n + 2 * i for i in range(n)]"
+  ],
+  [
+    "def words_string(s):\n    return s.replace(',', ' ').split()",
+    "def words_string(s):\n    return s.replace(',', ' ').split()",
+    "def words_string(s):\n    return s.replace(',', ' ').split()"
+  ],
+  [
+    "def choose_num(x, y):\n    if x > y:\n        return -1\n    max_even = y - (y % 2)\n    return max_even if max_even >= x else -1",
+    "def choose_num(x, y):\n    if x > y:\n        return -1\n    candidate = y - (y % 2)\n    return candidate if candidate >= x else -1",
+    "def choose_num(x, y):\n    if x > y:\n        return -1\n    candidate = y - (y % 2)\n    return candidate if candidate >= x else -1"
+  ],
+  [
+    "def rounded_avg(n, m):\n    if n > m:\n        return -1\n    total = n + m\n    if total & 1 == 0:\n        return bin(total // 2)\n    half = total // 2\n    return bin(half + (half & 1))",
+    "def rounded_avg(n, m):\n    if n > m:\n        return -1\n    s = n + m\n    if s & 1:\n        half = s >> 1\n        val = half if (half & 1) == 0 else half + 1\n    else:\n        val = s >> 1\n    return '0b' + bin(val)[2:]",
+    "def rounded_avg(n, m):\n    if n > m:\n        return -1\n    return bin(round((n + m) / 2))"
+  ],
+  [
+    "def unique_digits(x):\n    res = []\n    for num in x:\n        n = num\n        while n:\n            if (n % 10) & 1 == 0:\n                break\n            n //= 10\n        else:\n            res.append(num)\n    return sorted(res)",
+    "def unique_digits(x):\n    odd_digits = {'1', '3', '5', '7', '9'}\n    return sorted([num for num in x if all(d in odd_digits for d in str(num))])",
+    "def unique_digits(x):\n    odd_digits = {'1', '3', '5', '7', '9'}\n    return sorted([num for num in x if all(d in odd_digits for d in str(num))])"
+  ],
+  [
+    "def by_length(arr):\n    counts = [0] * 10\n    for x in arr:\n        if 1 <= x <= 9:\n            counts[x] += 1\n    names = [\"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\"]\n    result = []\n    for num in range(9, 0, -1):\n        result.extend([num] * counts[num])\n    return [names[num - 1] for num in result]",
+    "def by_length(arr):\n    count = [0] * 10\n    for x in arr:\n        if 1 <= x <= 9:\n            count[x] += 1\n    result = []\n    for i in range(9, 0, -1):\n        result.extend([i] * count[i])\n    names = [\"\", \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\"]\n    return [names[x] for x in result]",
+    "def by_length(arr):\n    count = [0] * 10\n    for x in arr:\n        if 1 <= x <= 9:\n            count[x] += 1\n    result_numbers = []\n    for num in range(9, 0, -1):\n        if count[num] > 0:\n            result_numbers.extend([num] * count[num])\n    name_map = [\"\", \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\"]\n    return [name_map[x] for x in result_numbers]"
+  ],
+  [
+    "def f(n):\n    res = []\n    fact = 1\n    for i in range(1, n + 1):\n        fact *= i\n        if i % 2 == 0:\n            res.append(fact)\n        else:\n            res.append(i * (i + 1) // 2)\n    return res",
+    "def f(n):\n    fact = [1] * (n + 1)\n    for i in range(1, n + 1):\n        fact[i] = fact[i-1] * i\n    return [fact[m] if m % 2 == 0 else m * (m + 1) // 2 for m in range(1, n + 1)]",
+    "def f(n):\n    res = []\n    current = 1\n    for i in range(1, n + 1):\n        if i % 2 == 0:\n            current *= i * (i - 1)\n            res.append(current)\n        else:\n            res.append(i * (i + 1) // 2)\n    return res"
+  ],
+  [
+    "def even_odd_palindrome(n):\n    len_n = len(str(n))\n    even_count = 0\n    odd_count = 0\n\n    for L in range(1, len_n):\n        m = (L + 1) // 2\n        even_add = 4 * (10 ** (m - 1))\n        odd_add = 5 * (10 ** (m - 1))\n        even_count += even_add\n        odd_count += odd_add\n\n    m = (len_n + 1) // 2\n    start = 10 ** (m - 1)\n    end = 10 ** m - 1\n\n    for left in range(start, end + 1):\n        left_str = str(left)\n        if len_n % 2 == 0:\n            pal_str = left_str + left_str[::-1]\n        else:\n            pal_str = left_str + left_str[:-1][::-1]\n        pal_num = int(pal_str)\n        if pal_num > n:\n            break\n        if pal_num % 2 == 0:\n            even_count += 1\n        else:\n            odd_count += 1\n\n    return (even_count, odd_count)",
+    "def even_odd_palindrome(n):\n    s = str(n)\n    len_s = len(s)\n    even_count = 0\n    odd_count = 0\n\n    for d in range(1, len_s):\n        len_left = (d + 1) // 2\n        even_count += 4 * (10 ** (len_left - 1))\n        odd_count += 5 * (10 ** (len_left - 1))\n    \n    len_left = (len_s + 1) // 2\n    start = 10 ** (len_left - 1)\n    end = 10 ** len_left\n\n    for left in range(start, end):\n        s_left = str(left)\n        if len_s % 2 == 0:\n            palindrome_str = s_left + s_left[::-1]\n        else:\n            palindrome_str = s_left + s_left[:-1][::-1]\n        num = int(palindrome_str)\n        if num <= n:\n            if num % 2 == 0:\n                even_count += 1\n            else:\n                odd_count += 1\n    return (even_count, odd_count)",
+    "def even_odd_palindrome(n):\n    D = len(str(n))\n    even_count = 0\n    odd_count = 0\n    for d in range(1, D):\n        m = (d + 1) // 2\n        per_digit = 10 ** (m - 1) if m > 1 else 1\n        even_d = 4 * per_digit\n        odd_d = 5 * per_digit\n        even_count += even_d\n        odd_count += odd_d\n    d = D\n    m = (d + 1) // 2\n    start_x = 10 ** (m - 1)\n    end_x = 10 ** m - 1\n    for x in range(start_x, end_x + 1):\n        if d % 2 == 0:\n            s = str(x) + str(x)[::-1]\n        else:\n            s = str(x) + str(x)[:-1][::-1]\n        num = int(s)\n        if num > n:\n            break\n        if s[-1] in '2468':\n            even_count += 1\n        else:\n            odd_count += 1\n    return (even_count, odd_count)"
+  ],
+  [
+    "def count_nums(arr):\n    return sum(1 for num in arr if (num >= 0 and sum(int(d) for d in str(num)) > 0) or (num < 0 and (sum(int(d) for d in str(num)[1:]) - 2 * int(str(num)[1])) > 0))",
+    "def count_nums(arr):\n    count = 0\n    for num in arr:\n        if num > 0:\n            s = 0\n            n = num\n            while n:\n                s += n % 10\n                n //= 10\n            if s > 0:\n                count += 1\n        else:\n            abs_n = -num\n            s = 0\n            n = abs_n\n            while n >= 10:\n                s += n % 10\n                n //= 10\n            sum_digits = s - n\n            if sum_digits > 0:\n                count += 1\n    return count",
+    "def count_nums(arr):\n    count = 0\n    for n in arr:\n        if n == 0:\n            continue\n        if n > 0:\n            total = 0\n            num = n\n            while num:\n                total += num % 10\n                num //= 10\n            if total > 0:\n                count += 1\n        else:\n            num = -n\n            total = 0\n            first_digit = 0\n            while num:\n                total += num % 10\n                if num < 10:\n                    first_digit = num\n                num //= 10\n            total = total - 2 * first_digit\n            if total > 0:\n                count += 1\n    return count"
+  ],
+  [
+    "def move_one_ball(arr):\n    if len(arr) == 0:\n        return True\n    n = len(arr)\n    m = arr.index(min(arr))\n    for i in range(m, m + n - 1):\n        if arr[i % n] >= arr[(i + 1) % n]:\n            return False\n    return True",
+    "def move_one_ball(arr):\n    n = len(arr)\n    if n == 0:\n        return True\n    drops = 0\n    for i in range(n):\n        if arr[i] > arr[(i + 1) % n]:\n            drops += 1\n    return drops == 0 or drops == 1",
+    "def move_one_ball(arr):\n    n = len(arr)\n    if n == 0:\n        return True\n    \n    min_index = 0\n    for i in range(1, n):\n        if arr[i] < arr[min_index]:\n            min_index = i\n    \n    if min_index == 0:\n        for i in range(1, n):\n            if arr[i] < arr[i-1]:\n                return False\n        return True\n    \n    for i in range(min_index, n-1):\n        if arr[i] > arr[i+1]:\n            return False\n    \n    if arr[n-1] > arr[0]:\n        return False\n    \n    for i in range(1, min_index):\n        if arr[i] < arr[i-1]:\n            return False\n    \n    return True"
+  ],
+  [
+    "def exchange(lst1, lst2):\n    odd_in_lst1 = sum(1 for num in lst1 if num % 2 != 0)\n    even_in_lst2 = sum(1 for num in lst2 if num % 2 == 0)\n    return \"YES\" if odd_in_lst1 <= even_in_lst2 else \"NO\"",
+    "def exchange(lst1, lst2):\n    count_odd1 = sum(1 for num in lst1 if num % 2 != 0)\n    count_even2 = sum(1 for num in lst2 if num % 2 == 0)\n    return \"YES\" if count_odd1 <= count_even2 else \"NO\"",
+    "def exchange(lst1, lst2):\n    odd_count = sum(1 for num in lst1 if num % 2 != 0)\n    even_count = sum(1 for num in lst2 if num % 2 == 0)\n    return \"YES\" if even_count >= odd_count else \"NO\""
+  ],
+  [
+    "def histogram(test):\n    if not test:\n        return {}\n    letters = test.split()\n    counts = {}\n    max_count = 0\n    for letter in letters:\n        counts[letter] = counts.get(letter, 0) + 1\n        if counts[letter] > max_count:\n            max_count = counts[letter]\n    return {letter: count for letter, count in counts.items() if count == max_count}",
+    "from collections import Counter\n\ndef histogram(test):\n    if not test:\n        return {}\n    counts = Counter(test.split())\n    max_count = max(counts.values())\n    return {k: v for k, v in counts.items() if v == max_count}",
+    "def histogram(test):\n    if not test:\n        return {}\n    count = {}\n    max_count = 0\n    for char in test:\n        if char != ' ':\n            count[char] = count.get(char, 0) + 1\n            if count[char] > max_count:\n                max_count = count[char]\n    return {k: v for k, v in count.items() if v == max_count}"
+  ],
+  [
+    "def reverse_delete(s, c):\n    c_set = set(c)\n    filtered = [char for char in s if char not in c_set]\n    result = ''.join(filtered)\n    left, right = 0, len(result) - 1\n    is_pal = True\n    while left < right:\n        if result[left] != result[right]:\n            is_pal = False\n            break\n        left += 1\n        right -= 1\n    return (result, is_pal)",
+    "def reverse_delete(s, c):\n    c_set = set(c)\n    filtered = [char for char in s if char not in c_set]\n    new_s = ''.join(filtered)\n    left, right = 0, len(new_s) - 1\n    is_pal = True\n    while left < right:\n        if new_s[left] != new_s[right]:\n            is_pal = False\n            break\n        left += 1\n        right -= 1\n    return (new_s, is_pal)",
+    "def reverse_delete(s, c):\n    c_set = set(c)\n    result = ''.join(char for char in s if char not in c_set)\n    return (result, result == result[::-1])"
+  ],
+  [
+    "def odd_count(lst):\n    odd_digits = {'1', '3', '5', '7', '9'}\n    return [\n        f\"the number of odd elements {count}n the str{count}ng {count} of the {count}nput.\"\n        for s in lst\n        for count in (sum(c in odd_digits for c in s),)\n    ]",
+    "def odd_count(lst):\n    odd_digits = {'1', '3', '5', '7', '9'}\n    return [f\"the number of odd elements {c}n the str{c}ng {c} of the {c}nput.\" for s in lst for c in (sum(1 for d in s if d in odd_digits),)]",
+    "def odd_count(lst):\n    odd_digits = {'1', '3', '5', '7', '9'}\n    return [\n        f\"the number of odd elements {count}n the str{count}ng {count} of the {count}nput.\"\n        for s in lst\n        for count in (sum(c in odd_digits for c in s),)\n    ]"
+  ],
+  [
+    "def minSubArraySum(nums):\n    current_min = nums[0]\n    min_sum = nums[0]\n    for num in nums[1:]:\n        current_min = min(num, current_min + num)\n        min_sum = min(min_sum, current_min)\n    return min_sum",
+    "def minSubArraySum(nums):\n    current_min = nums[0]\n    min_so_far = nums[0]\n    for num in nums[1:]:\n        current_min = min(num, current_min + num)\n        min_so_far = min(min_so_far, current_min)\n    return min_so_far",
+    "def minSubArraySum(nums):\n    current_min = nums[0]\n    min_sum = nums[0]\n    for num in nums[1:]:\n        current_min = min(num, current_min + num)\n        min_sum = min(min_sum, current_min)\n    return min_sum"
+  ],
+  [
+    "def max_fill(grid, capacity):\n    return sum((sum(row) + capacity - 1) // capacity for row in grid)",
+    "def max_fill(grid, capacity):\n    return sum((sum(row) + capacity - 1) // capacity for row in grid)",
+    "import math\n\ndef max_fill(grid, capacity):\n    return sum((sum(row) + capacity - 1) // capacity for row in grid)"
+  ],
+  [
+    "def sort_array(arr):\n    return sorted(arr, key=lambda x: (x.bit_count(), x))",
+    "def sort_array(arr):\n    return sorted(arr, key=lambda x: (x.bit_count(), x))",
+    "def sort_array(arr):\n    return sorted(arr, key=lambda x: (x.bit_count(), x))"
+  ],
+  [
+    "def select_words(s, n):\n    if not s:\n        return []\n    vowels = set('aeiouAEIOU')\n    return [word for word in s.split() if sum(1 for c in word if c not in vowels) == n]",
+    "def select_words(s, n):\n    vowels = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'}\n    return [word for word in s.split() if sum(1 for c in word if c not in vowels) == n]",
+    "def select_words(s, n):\n    vowels = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'}\n    return [word for word in s.split() if sum(1 for c in word if c not in vowels) == n]"
+  ],
+  [
+    "def get_closest_vowel(word):\n    vowels = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'}\n    n = len(word)\n    for i in range(n-1, -1, -1):\n        if word[i] in vowels:\n            if i == 0 or i == n-1:\n                continue\n            left_char = word[i-1]\n            right_char = word[i+1]\n            if left_char not in vowels and right_char not in vowels:\n                return word[i]\n    return ''",
+    "def get_closest_vowel(word):\n    vowels = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'}\n    n = len(word)\n    for i in range(n - 2, 0, -1):\n        if word[i] in vowels:\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    return ''",
+    "def get_closest_vowel(word):\n    vowels = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'}\n    n = len(word)\n    for i in range(n-2, 0, -1):\n        if word[i] in vowels:\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    return \"\""
+  ],
+  [
+    "def match_parens(lst):\n    s = lst[0]\n    t = lst[1]\n    \n    total_open_s = s.count('(')\n    total_close_s = s.count(')')\n    total_open_t = t.count('(')\n    total_close_t = t.count(')')\n    \n    if total_open_s + total_open_t != total_close_s + total_close_t:\n        return 'No'\n    \n    def get_balance_and_min(s):\n        balance = 0\n        min_balance = 0\n        for c in s:\n            if c == '(':\n                balance += 1\n            else:\n                balance -= 1\n            if balance < min_balance:\n                min_balance = balance\n        return balance, min_balance\n    \n    balance_s, min_s = get_balance_and_min(s)\n    balance_t, min_t = get_balance_and_min(t)\n    \n    if balance_s >= 0 and min_t >= -balance_s:\n        return 'Yes'\n    if balance_t >= 0 and min_s >= -balance_t:\n        return 'Yes'\n    return 'No'",
+    "def match_parens(lst):\n    s1, s2 = lst\n    b1, m1 = 0, 0\n    for c in s1:\n        if c == '(':\n            b1 += 1\n        else:\n            b1 -= 1\n        if b1 < m1:\n            m1 = b1\n    b2, m2 = 0, 0\n    for c in s2:\n        if c == '(':\n            b2 += 1\n        else:\n            b2 -= 1\n        if b2 < m2:\n            m2 = b2\n    if b1 + b2 != 0:\n        return 'No'\n    return 'Yes' if (m1 >= 0 and b1 + m2 >= 0) or (m2 >= 0 and b2 + m1 >= 0) else 'No'",
+    "def match_parens(lst):\n    s1, s2 = lst\n    total_open = s1.count('(') + s2.count('(')\n    total_close = s1.count(')') + s2.count(')')\n    if total_open != total_close:\n        return 'No'\n    def check_order(a, b):\n        balance = 0\n        for c in a:\n            balance += 1 if c == '(' else -1\n            if balance < 0:\n                return False\n        for c in b:\n            balance += 1 if c == '(' else -1\n            if balance < 0:\n                return False\n        return balance == 0\n    return 'Yes' if check_order(s1, s2) or check_order(s2, s1) else 'No'"
+  ],
+  [
+    "import heapq\n\ndef maximum(arr, k):\n    return heapq.nlargest(k, arr)[::-1]",
+    "def maximum(arr, k):\n    if k == 0:\n        return []\n    freq = [0] * 2001\n    for x in arr:\n        idx = x + 1000\n        freq[idx] += 1\n    remaining = k\n    res = []\n    for v in range(1000, -1001, -1):\n        idx = v + 1000\n        cnt = freq[idx]\n        if cnt == 0:\n            continue\n        take = min(cnt, remaining)\n        res.extend([v] * take)\n        remaining -= take\n        if remaining == 0:\n            break\n    return res[::-1]",
+    "def maximum(arr, k):\n    return sorted(arr)[-k:]"
+  ],
+  [
+    "def solution(lst):\n    return sum(x for i, x in enumerate(lst) if i & 1 == 0 and x & 1)",
+    "def solution(lst):\n    return sum(x for i in range(0, len(lst), 2) if (x := lst[i]) & 1)",
+    "def solution(lst):\n    return sum(x for i, x in enumerate(lst) if (i & 1) == 0 and x & 1)"
+  ],
+  [
+    "def add_elements(arr, k):\n    total = 0\n    for i in range(k):\n        num = arr[i]\n        if -99 <= num <= 99:\n            total += num\n    return total",
+    "def add_elements(arr, k):\n    total = 0\n    for i in range(k):\n        if arr[i] < 100:\n            total += arr[i]\n    return total",
+    "def add_elements(arr, k):\n    return sum(x for x in arr[:k] if x <= 99)"
+  ],
+  [
+    "def get_odd_collatz(n):\n    odds = []\n    current = n\n    while current != 1:\n        if current & 1:\n            odds.append(current)\n        current = current * 3 + 1 if current & 1 else current >> 1\n    odds.append(1)\n    return sorted(odds)",
+    "def get_odd_collatz(n):\n    odds = []\n    current = n\n    while current != 1:\n        if current & 1:\n            odds.append(current)\n        current = current >> 1 if current & 1 == 0 else 3 * current + 1\n    odds.append(1)\n    return sorted(odds)",
+    "def get_odd_collatz(n):\n    odds = []\n    current = n\n    while current != 1:\n        if current & 1:\n            odds.append(current)\n            current = 3 * current + 1\n        else:\n            while current & 1 == 0:\n                current >>= 1\n    odds.append(1)\n    return sorted(odds)"
+  ],
+  [
+    "def valid_date(date):\n    if len(date) != 10:\n        return False\n    parts = date.split('-')\n    if len(parts) != 3:\n        return False\n    for part in parts:\n        if not part.isdigit():\n            return False\n    month = int(parts[0])\n    day = int(parts[1])\n    if month < 1 or month > 12:\n        return False\n    MAX_DAYS = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\n    if day < 1 or day > MAX_DAYS[month]:\n        return False\n    return True",
+    "def valid_date(date):\n    if len(date) == 0:\n        return False\n    if len(date) != 10:\n        return False\n    if date[2] != '-' or date[5] != '-':\n        return False\n    if not (date[0:2].isdigit() and date[3:5].isdigit() and date[6:10].isdigit()):\n        return False\n    month = int(date[0:2])\n    day = int(date[3:5])\n    if month < 1 or month > 12:\n        return False\n    max_days = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\n    if day < 1 or day > max_days[month]:\n        return False\n    return True",
+    "def valid_date(date):\n    if not date:\n        return False\n    if len(date) != 10:\n        return False\n    if date[2] != '-' or date[5] != '-':\n        return False\n    if not (date[0:2].isdigit() and date[3:5].isdigit() and date[6:10].isdigit()):\n        return False\n    month = int(date[0:2])\n    day = int(date[3:5])\n    year = int(date[6:10])\n    if month < 1 or month > 12:\n        return False\n    max_days = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\n    if day < 1 or day > max_days[month]:\n        return False\n    return True"
+  ],
+  [
+    "def split_words(txt):\n    has_whitespace = False\n    has_comma = False\n    for c in txt:\n        if c.isspace():\n            has_whitespace = True\n        elif c == ',':\n            has_comma = True\n    if has_whitespace:\n        return txt.split()\n    elif has_comma:\n        return txt.split(',')\n    else:\n        return sum(1 for c in txt if c.islower() and ord(c) % 2 == 0)",
+    "def split_words(txt):\n    if any(char.isspace() for char in txt):\n        return txt.split()\n    elif ',' in txt:\n        return txt.split(',')\n    else:\n        return sum(1 for char in txt if char.islower() and (ord(char) - ord('a')) % 2 == 1)",
+    "def split_words(txt):\n    words = txt.split()\n    if len(words) > 1:\n        return words\n    if ',' in txt:\n        return txt.split(',')\n    return sum(1 for c in txt if c.islower() and (ord(c) - ord('a')) % 2 == 1)"
+  ],
+  [
+    "def is_sorted(lst):\n    n = len(lst)\n    if n <= 2:\n        return True\n    for i in range(1, n):\n        if lst[i] < lst[i-1]:\n            return False\n        if i >= 2 and lst[i] == lst[i-1] == lst[i-2]:\n            return False\n    return True",
+    "def is_sorted(lst):\n    n = len(lst)\n    for i in range(n - 2):\n        if lst[i] > lst[i+1]:\n            return False\n        if lst[i] == lst[i+1] == lst[i+2]:\n            return False\n    return True",
+    "def is_sorted(lst):\n    if len(lst) <= 2:\n        return True\n    prev = lst[0]\n    count = 1\n    for i in range(1, len(lst)):\n        if lst[i] < prev:\n            return False\n        if lst[i] == prev:\n            count += 1\n        else:\n            if count > 2:\n                return False\n            count = 1\n        prev = lst[i]\n    if count > 2:\n        return False\n    return True"
+  ],
+  [
+    "def intersection(interval1, interval2):\n    a, b = interval1\n    c, d = interval2\n    start = max(a, c)\n    end = min(b, d)\n    if end < start:\n        return \"NO\"\n    length = end - start\n    if length < 2:\n        return \"NO\"\n    if length == 2:\n        return \"YES\"\n    if length % 2 == 0:\n        return \"NO\"\n    i = 3\n    while i * i <= length:\n        if length % i == 0:\n            return \"NO\"\n        i += 2\n    return \"YES\"",
+    "def intersection(interval1, interval2):\n    s1, e1 = interval1\n    s2, e2 = interval2\n    start = max(s1, s2)\n    end = min(e1, e2)\n    if start > end:\n        return \"NO\"\n    length = end - start\n    if length < 2:\n        return \"NO\"\n    if length == 2:\n        return \"YES\"\n    if length % 2 == 0:\n        return \"NO\"\n    i = 3\n    while i * i <= length:\n        if length % i == 0:\n            return \"NO\"\n        i += 2\n    return \"YES\"",
+    "def intersection(interval1, interval2):\n    a, b = interval1\n    c, d = interval2\n    start = max(a, c)\n    end = min(b, d)\n    if start > end:\n        return \"NO\"\n    length = end - start\n    if length < 2:\n        return \"NO\"\n    if length == 2:\n        return \"YES\"\n    if length % 2 == 0:\n        return \"NO\"\n    i = 3\n    while i * i <= length:\n        if length % i == 0:\n            return \"NO\"\n        i += 2\n    return \"YES\""
+  ],
+  [
+    "def prod_signs(arr):\n    if not arr:\n        return None\n    total_sum = 0\n    has_zero = False\n    product_sign = 1\n    for x in arr:\n        total_sum += abs(x)\n        if x == 0:\n            has_zero = True\n        elif x < 0:\n            product_sign *= -1\n    if has_zero:\n        product_sign = 0\n    return total_sum * product_sign",
+    "def prod_signs(arr):\n    if not arr:\n        return None\n    sum_abs = 0\n    prod_sign = 1\n    for x in arr:\n        if x == 0:\n            prod_sign = 0\n            break\n        sum_abs += abs(x)\n        if x < 0:\n            prod_sign *= -1\n    return sum_abs * prod_sign",
+    "def prod_signs(arr):\n    if not arr:\n        return None\n    total_abs = 0\n    product_sign = 1\n    for x in arr:\n        total_abs += abs(x)\n        if x == 0:\n            product_sign = 0\n        else:\n            product_sign *= 1 if x > 0 else -1\n    return total_abs * product_sign"
+  ],
+  [
+    "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    i0, j0 = -1, -1\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                i0, j0 = i, j\n    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]\n    neighbors = []\n    for dx, dy in directions:\n        ni, nj = i0 + dx, j0 + dy\n        if 0 <= ni < n and 0 <= nj < n:\n            neighbors.append(grid[ni][nj])\n    m1 = min(neighbors)\n    return [min_val if step % 2 == 0 else m1 for step in range(k)]",
+    "def minPath(grid, k):\n    N = len(grid)\n    min_val = float('inf')\n    start_r, start_c = -1, -1\n    for r in range(N):\n        for c in range(N):\n            if grid[r][c] < min_val:\n                min_val = grid[r][c]\n                start_r, start_c = r, c\n    \n    next_map = [[None] * N for _ in range(N)]\n    directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]\n    \n    for r in range(N):\n        for c in range(N):\n            min_val_neighbor = float('inf')\n            best_neighbor = None\n            for dr, dc in directions:\n                nr, nc = r + dr, c + dc\n                if 0 <= nr < N and 0 <= nc < N:\n                    val = grid[nr][nc]\n                    if val < min_val_neighbor:\n                        min_val_neighbor = val\n                        best_neighbor = (nr, nc)\n            next_map[r][c] = best_neighbor\n    \n    path = []\n    r, c = start_r, start_c\n    for _ in range(k):\n        path.append(grid[r][c])\n        if len(path) < k:\n            r, c = next_map[r][c]\n    return path",
+    "def minPath(grid, k):\n    n = len(grid)\n    start_i, start_j = -1, -1\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] == 1:\n                start_i, start_j = i, j\n                break\n        else:\n            continue\n        break\n    \n    path = [1]\n    cur_i, cur_j = start_i, start_j\n    for _ in range(k-1):\n        min_val = float('inf')\n        min_i, min_j = -1, -1\n        for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:\n            ni, nj = cur_i + dx, cur_j + dy\n            if 0 <= ni < n and 0 <= nj < n:\n                val = grid[ni][nj]\n                if val < min_val:\n                    min_val = val\n                    min_i, min_j = ni, nj\n        path.append(min_val)\n        cur_i, cur_j = min_i, min_j\n    return path"
+  ],
+  [
+    "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    res = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            res.append(1 + i // 2)\n        else:\n            next_even = 1 + (i + 1) // 2\n            res.append(res[-1] + res[-2] + next_even)\n    return res",
+    "def tri(n):\n    if n == 0:\n        return [1]\n    res = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            res.append(i // 2 + 1)\n        else:\n            res.append(res[i - 2] + i + 2)\n    return res",
+    "def tri(n):\n    if n == 0:\n        return [1]\n    res = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            res.append(i // 2 + 1)\n        else:\n            next_even = (i + 1) // 2 + 1\n            res.append(res[-1] + res[-2] + next_even)\n    return res"
+  ],
+  [
+    "def digits(n):\n    product = 1\n    has_odd = False\n    while n:\n        digit = n % 10\n        if digit & 1:\n            product *= digit\n            has_odd = True\n        n //= 10\n    return product if has_odd else 0",
+    "def digits(n):\n    product = 0\n    while n:\n        d = n % 10\n        n //= 10\n        if d & 1:\n            product = d if product == 0 else product * d\n    return product",
+    "def digits(n):\n    product = 1\n    has_odd = False\n    while n:\n        digit = n % 10\n        if digit & 1:\n            product *= digit\n            has_odd = True\n        n //= 10\n    return product if has_odd else 0"
+  ],
+  [
+    "def is_nested(string):\n    depth = 0\n    max_depth = 0\n    for c in string:\n        if c == '[':\n            depth += 1\n        else:\n            depth = max(0, depth - 1)\n        if depth > max_depth:\n            max_depth = depth\n    return max_depth >= 2",
+    "def is_nested(string):\n    first_open = None\n    second_open = None\n    first_close = None\n    second_close = None\n    for i, char in enumerate(string):\n        if char == '[':\n            if first_open is None:\n                first_open = i\n            elif second_open is None:\n                second_open = i\n        else:\n            if first_close is None:\n                first_close = i\n            elif second_close is None:\n                second_close = i\n    if second_open is not None and second_close is not None:\n        return second_open < first_close\n    return False",
+    "def is_nested(string):\n    count_open = 0\n    second_open_index = -1\n    for i, char in enumerate(string):\n        if char == '[':\n            count_open += 1\n            if count_open == 2:\n                second_open_index = i\n                break\n    if count_open < 2:\n        return False\n    count_close = 0\n    for i in range(second_open_index + 1, len(string)):\n        if string[i] == ']':\n            count_close += 1\n            if count_close >= 2:\n                return True\n    return False"
+  ],
+  [
+    "import math\n\ndef sum_squares(lst):\n    return sum(int(math.ceil(x)) ** 2 for x in lst)",
+    "import math\n\ndef sum_squares(lst):\n    return sum(math.ceil(x) ** 2 for x in lst)",
+    "import math\n\ndef sum_squares(lst):\n    ceil = math.ceil\n    return int(sum(ceil(x) ** 2 for x in lst))"
+  ],
+  [
+    "def check_if_last_char_is_a_letter(txt):\n    if not txt:\n        return False\n    if not txt[-1].isalpha():\n        return False\n    count = 0\n    i = len(txt) - 1\n    while i >= 0 and txt[i] != ' ':\n        count += 1\n        i -= 1\n    return count == 1",
+    "def check_if_last_char_is_a_letter(txt):\n    return len(txt) > 1 and txt[-1].isalpha() and txt[-2] == ' '",
+    "def check_if_last_char_is_a_letter(txt):\n    if not txt:\n        return False\n    if not txt[-1].isalpha():\n        return False\n    if len(txt) > 1 and txt[-2] == ' ':\n        return True\n    return False"
+  ],
+  [
+    "def can_arrange(arr):\n    n = len(arr)\n    for i in range(n-1, 0, -1):\n        if arr[i] < arr[i-1]:\n            return i\n    return -1",
+    "def can_arrange(arr):\n    max_index = -1\n    for i in range(1, len(arr)):\n        if arr[i] < arr[i-1]:\n            max_index = i\n    return max_index",
+    "def can_arrange(arr):\n    n = len(arr)\n    for i in range(n-1, 0, -1):\n        if arr[i] < arr[i-1]:\n            return i\n    return -1"
+  ],
+  [
+    "def largest_smallest_integers(lst):\n    max_neg = None\n    min_pos = None\n    for num in lst:\n        if num < 0:\n            if max_neg is None or num > max_neg:\n                max_neg = num\n        elif num > 0:\n            if min_pos is None or num < min_pos:\n                min_pos = num\n    return (max_neg, min_pos)",
+    "def largest_smallest_integers(lst):\n    max_neg = None\n    min_pos = None\n    for num in lst:\n        if num < 0:\n            if max_neg is None or num > max_neg:\n                max_neg = num\n        elif num > 0:\n            if min_pos is None or num < min_pos:\n                min_pos = num\n    return (max_neg, min_pos)",
+    "def largest_smallest_integers(lst):\n    max_neg = None\n    min_pos = None\n    for x in lst:\n        if x < 0:\n            if max_neg is None or x > max_neg:\n                max_neg = x\n        elif x > 0:\n            if min_pos is None or x < min_pos:\n                min_pos = x\n    return (max_neg, min_pos)"
+  ],
+  [
+    "def compare_one(a, b):\n    a_num = float(a) if not isinstance(a, str) else float(a.replace(',', '.'))\n    b_num = float(b) if not isinstance(b, str) else float(b.replace(',', '.'))\n    if a_num > b_num:\n        return a\n    elif b_num > a_num:\n        return b\n    else:\n        return None",
+    "def compare_one(a, b):\n    a_num = float(a.replace(',', '.')) if isinstance(a, str) else a\n    b_num = float(b.replace(',', '.')) if isinstance(b, str) else b\n    if a_num == b_num:\n        return None\n    return a if a_num > b_num else b",
+    "def compare_one(a, b):\n    a_val = float(a) if not isinstance(a, str) else float(a.replace(',', '.'))\n    b_val = float(b) if not isinstance(b, str) else float(b.replace(',', '.'))\n    if a_val > b_val:\n        return a\n    elif b_val > a_val:\n        return b\n    return None"
+  ],
+  [
+    "def is_equal_to_sum_even(n):\n    return n >= 8 and n % 2 == 0",
+    "def is_equal_to_sum_even(n):\n    return n >= 8 and n % 2 == 0",
+    "def is_equal_to_sum_even(n):\n    return n >= 8 and n % 2 == 0"
+  ],
+  [
+    "def special_factorial(n):\n    product = 1\n    fact = 1\n    for i in range(1, n + 1):\n        fact *= i\n        product *= fact\n    return product",
+    "def special_factorial(n):\n    result = 1\n    fact = 1\n    for i in range(1, n + 1):\n        fact *= i\n        result *= fact\n    return result",
+    "def special_factorial(n):\n    result = 1\n    fact = 1\n    for k in range(1, n + 1):\n        fact *= k\n        result *= fact\n    return result"
+  ],
+  [
+    "import re\n\ndef fix_spaces(text):\n    return re.sub(r'_{3,}', '-', text.replace(' ', '_'))",
+    "def fix_spaces(text):\n    result = []\n    count = 0\n    for c in text:\n        if c == ' ':\n            count += 1\n        else:\n            if count > 0:\n                result.append('-' if count > 2 else '_')\n                count = 0\n            result.append(c)\n    if count > 0:\n        result.append('-' if count > 2 else '_')\n    return ''.join(result)",
+    "def fix_spaces(text):\n    result = []\n    current_run = 0\n    for c in text:\n        if c == ' ':\n            current_run += 1\n        else:\n            if current_run > 0:\n                result.append('-' if current_run > 2 else '_' * current_run)\n            result.append(c)\n            current_run = 0\n    if current_run > 0:\n        result.append('-' if current_run > 2 else '_' * current_run)\n    return ''.join(result)"
+  ],
+  [
+    "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.', 1)\n    before, after = parts\n    if not before:\n        return 'No'\n    if not before[0].isalpha():\n        return 'No'\n    if len(after) != 3:\n        return 'No'\n    if after not in {'txt', 'exe', 'dll'}:\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    return 'Yes' if digit_count <= 3 else 'No'",
+    "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    prefix, suffix = file_name.split('.', 1)\n    if not prefix:\n        return 'No'\n    if not prefix[0].isalpha():\n        return 'No'\n    if suffix not in ['txt', 'exe', 'dll']:\n        return 'No'\n    digits = sum(1 for c in prefix if c.isdigit())\n    return 'Yes' if digits <= 3 else 'No'",
+    "def file_name_check(file_name):\n    parts = file_name.split('.')\n    if len(parts) != 2:\n        return 'No'\n    prefix, suffix = parts\n    if not prefix:\n        return 'No'\n    if not prefix[0].isalpha():\n        return 'No'\n    if suffix not in ['txt', 'exe', 'dll']:\n        return 'No'\n    digits_in_prefix = sum(c.isdigit() for c in prefix)\n    digits_in_suffix = sum(c.isdigit() for c in suffix)\n    return 'Yes' if digits_in_prefix + digits_in_suffix <= 3 else 'No'"
+  ],
+  [
+    "def sum_squares(lst):\n    square_remainders = {0, 3, 6, 9}\n    cube_remainders = {4, 8}\n    return sum(x**2 if i % 12 in square_remainders else x**3 if i % 12 in cube_remainders else x for i, x in enumerate(lst))",
+    "def sum_squares(lst):\n    actions = [1, 0, 0, 1, 2, 0, 1, 0, 2, 1, 0, 0]\n    total = 0\n    for i, x in enumerate(lst):\n        r = i % 12\n        if actions[r] == 1:\n            total += x ** 2\n        elif actions[r] == 2:\n            total += x ** 3\n        else:\n            total += x\n    return total",
+    "def sum_squares(lst):\n    return sum(x**2 if i % 3 == 0 else x**3 if i % 4 == 0 else x for i, x in enumerate(lst))"
+  ],
+  [
+    "max_n = 1000000\nsieve = [True] * (max_n + 1)\nsieve[0] = False\nsieve[1] = False\nfor i in range(2, int(max_n**0.5) + 1):\n    if sieve[i]:\n        for j in range(i * i, max_n + 1, i):\n            sieve[j] = False\n\ndef words_in_sentence(sentence):\n    words = sentence.split()\n    res = []\n    for word in words:\n        n = len(word)\n        if n <= max_n and sieve[n]:\n            res.append(word)\n    return ' '.join(res)",
+    "def words_in_sentence(sentence):\n    max_n = 1000000\n    is_prime = [True] * (max_n + 1)\n    is_prime[0] = False\n    is_prime[1] = False\n    for i in range(2, int(max_n**0.5) + 1):\n        if is_prime[i]:\n            for j in range(i * i, max_n + 1, i):\n                is_prime[j] = False\n    words = sentence.split()\n    return ' '.join(word for word in words if is_prime[len(word)])",
+    "def words_in_sentence(sentence):\n    if not hasattr(words_in_sentence, 'sieve'):\n        n = 1000000\n        sieve = [True] * (n + 1)\n        sieve[0] = sieve[1] = False\n        for i in range(2, int(n**0.5) + 1):\n            if sieve[i]:\n                for j in range(i * i, n + 1, i):\n                    sieve[j] = False\n        words_in_sentence.sieve = sieve\n    words = sentence.split()\n    return ' '.join(word for word in words if len(word) <= 1000000 and words_in_sentence.sieve[len(word)])"
+  ],
+  [
+    "import math\n\ndef simplify(x, n):\n    x_num, x_den = map(int, x.split('/'))\n    n_num, n_den = map(int, n.split('/'))\n    \n    g_x = math.gcd(x_num, x_den)\n    x_num //= g_x\n    x_den //= g_x\n    \n    g_n = math.gcd(n_num, n_den)\n    n_num //= g_n\n    n_den //= g_n\n    \n    return (n_num % x_den == 0) and (x_num % n_den == 0)",
+    "def simplify(x, n):\n    x_num, x_den = map(int, x.split('/'))\n    n_num, n_den = map(int, n.split('/'))\n    if (x_num * n_num) % x_den != 0:\n        return False\n    temp = (x_num * n_num) // x_den\n    return temp % n_den == 0",
+    "import math\n\ndef simplify(x, n):\n    x_num, x_den = map(int, x.split('/'))\n    n_num, n_den = map(int, n.split('/'))\n    \n    g1 = math.gcd(x_num, x_den)\n    x_num //= g1\n    x_den //= g1\n    \n    g2 = math.gcd(n_num, n_den)\n    n_num //= g2\n    n_den //= g2\n    \n    return (x_num * n_num) % (x_den * n_den) == 0"
+  ],
+  [
+    "def order_by_points(nums):\n    def sum_digits(n):\n        n = abs(n)\n        s = 0\n        while n:\n            s += n % 10\n            n //= 10\n        return s\n    items = [(sum_digits(n), i, n) for i, n in enumerate(nums)]\n    items.sort()\n    return [num for _, _, num in items]",
+    "def order_by_points(nums):\n    def get_digit_sum(x):\n        x = abs(x)\n        total = 0\n        while x:\n            total += x % 10\n            x //= 10\n        return total\n    return sorted(nums, key=get_digit_sum)",
+    "def order_by_points(nums):\n    def sum_digits(n):\n        s = 0\n        num = abs(n)\n        while num:\n            s += num % 10\n            num //= 10\n        return s\n    indexed = [(sum_digits(num), i, num) for i, num in enumerate(nums)]\n    return [num for _, _, num in sorted(indexed, key=lambda x: (x[0], -x[1]))]"
+  ],
+  [
+    "def specialFilter(nums):\n    return sum(1 for num in nums if num > 10 and (num % 10) % 2 == 1 and int(str(num)[0]) % 2 == 1)",
+    "def specialFilter(nums):\n    odd_digits = {'1', '3', '5', '7', '9'}\n    return sum(1 for num in nums if num > 10 and (num % 10) & 1 and str(num)[0] in odd_digits)",
+    "def specialFilter(nums):\n    count = 0\n    for num in nums:\n        if num <= 10:\n            continue\n        last_digit = num % 10\n        if last_digit % 2 == 0:\n            continue\n        first_digit = num\n        while first_digit >= 10:\n            first_digit //= 10\n        if first_digit % 2 == 1:\n            count += 1\n    return count"
+  ],
+  [
+    "def get_max_triples(n):\n    count0 = (n + 1) // 3\n    count1 = n - count0\n    return (count0 * (count0 - 1) * (count0 - 2) // 6) + (count1 * (count1 - 1) * (count1 - 2) // 6)",
+    "def get_max_triples(n):\n    c0 = (n + 1) // 3\n    c1 = n - c0\n    return (c0 * (c0 - 1) * (c0 - 2) // 6) + (c1 * (c1 - 1) * (c1 - 2) // 6)",
+    "def get_max_triples(n):\n    count0 = (n + 1) // 3\n    count1 = n - count0\n    return (count0 * (count0 - 1) * (count0 - 2) // 6) + (count1 * (count1 - 1) * (count1 - 2) // 6)"
+  ],
+  [
+    "def bf(planet1, planet2):\n    planets = [\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\"]\n    if planet1 not in planets or planet2 not in planets:\n        return ()\n    idx1 = planets.index(planet1)\n    idx2 = planets.index(planet2)\n    start = min(idx1, idx2)\n    end = max(idx1, idx2)\n    return tuple(planets[start+1:end])",
+    "planets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']\nplanet_to_index = {p: i for i, p in enumerate(planets)}\n\ndef bf(planet1, planet2):\n    if planet1 not in planet_to_index or planet2 not in planet_to_index:\n        return ()\n    idx1 = planet_to_index[planet1]\n    idx2 = planet_to_index[planet2]\n    start = min(idx1, idx2)\n    end = max(idx1, idx2)\n    return tuple(planets[start+1:end])",
+    "planets = [\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\"]\nplanet_to_index = {p: i for i, p in enumerate(planets)}\n\ndef bf(planet1, planet2):\n    if planet1 not in planet_to_index or planet2 not in planet_to_index:\n        return ()\n    idx1 = planet_to_index[planet1]\n    idx2 = planet_to_index[planet2]\n    start = min(idx1, idx2)\n    end = max(idx1, idx2)\n    return tuple(planets[start+1:end])"
+  ],
+  [
+    "def sorted_list_sum(lst):\n    return sorted([s for s in lst if len(s) % 2 == 0], key=lambda x: (len(x), x))",
+    "def sorted_list_sum(lst):\n    return sorted([s for s in lst if len(s) % 2 == 0], key=lambda x: (len(x), x))",
+    "def sorted_list_sum(lst):\n    return [s for _, s in sorted(( (len(s), s) for s in lst if len(s) % 2 == 0 ))]"
+  ],
+  [
+    "def x_or_y(n, x, y):\n    if n < 2:\n        return y\n    if n == 2 or n == 3:\n        return x\n    if n % 2 == 0 or n % 3 == 0:\n        return y\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return y\n        i += 6\n    return x",
+    "def x_or_y(n, x, y):\n    if n < 2:\n        return y\n    if n == 2 or n == 3:\n        return x\n    if n % 2 == 0 or n % 3 == 0:\n        return y\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return y\n        i += 6\n    return x",
+    "def x_or_y(n, x, y):\n    if n < 2:\n        return y\n    if n == 2 or n == 3:\n        return x\n    if n % 2 == 0 or n % 3 == 0:\n        return y\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return y\n        i += 6\n    return x"
+  ],
+  [
+    "def double_the_difference(lst):\n    return sum(x * x for x in lst if x > 0 and x % 2 == 1)",
+    "def double_the_difference(lst):\n    return sum(x * x for x in lst if isinstance(x, int) and x > 0 and x % 2 == 1)",
+    "def double_the_difference(lst):\n    return sum(x * x for x in lst if isinstance(x, int) and x > 0 and x % 2 == 1)"
+  ],
+  [
+    "def compare(game, guess):\n    return [abs(a - b) for a, b in zip(game, guess)]",
+    "def compare(game, guess):\n    return [abs(x - y) for x, y in zip(game, guess)]",
+    "def compare(game, guess):\n    return [abs(a - b) for a, b in zip(game, guess)]"
+  ],
+  [
+    "def Strongest_Extension(class_name, extensions):\n    best_extension = None\n    max_strength = None\n    for ext in extensions:\n        strength = sum(1 if c.isupper() else -1 if c.islower() else 0 for c in ext)\n        if best_extension is None or strength > max_strength:\n            best_extension = ext\n            max_strength = strength\n    return f\"{class_name}.{best_extension}\"",
+    "def Strongest_Extension(class_name, extensions):\n    return f\"{class_name}.{max(extensions, key=lambda ext: sum(1 if c.isupper() else -1 if c.islower() else 0 for c in ext))}\"",
+    "def Strongest_Extension(class_name, extensions):\n    max_strength = None\n    max_extension = None\n    for ext in extensions:\n        strength = 0\n        for c in ext:\n            if c.isupper():\n                strength += 1\n            elif c.islower():\n                strength -= 1\n        if max_extension is None or strength > max_strength:\n            max_strength = strength\n            max_extension = ext\n    return f\"{class_name}.{max_extension}\""
+  ],
+  [
+    "def cycpattern_check(a, b):\n    if len(b) > len(a):\n        return False\n    if len(b) == 0:\n        return True\n    s = b + b\n    n = len(b)\n    for i in range(n):\n        if s[i:i+n] in a:\n            return True\n    return False",
+    "def cycpattern_check(a, b):\n    m = len(b)\n    n = len(a)\n    if m > n:\n        return False\n    if m == 0:\n        return True\n    s = b + b\n    for i in range(m):\n        if s[i:i+m] in a:\n            return True\n    return False",
+    "def cycpattern_check(a, b):\n    n = len(b)\n    if n > len(a):\n        return False\n    for i in range(n):\n        if b[i:] + b[:i] in a:\n            return True\n    return False"
+  ],
+  [
+    "def even_odd_count(num):\n    even_digits = {'0', '2', '4', '6', '8'}\n    s = str(abs(num))\n    even_count = sum(1 for c in s if c in even_digits)\n    return (even_count, len(s) - even_count)",
+    "def even_odd_count(num):\n    if num == 0:\n        return (1, 0)\n    num = abs(num)\n    even_count = 0\n    odd_count = 0\n    while num > 0:\n        digit = num % 10\n        num //= 10\n        if digit & 1 == 0:\n            even_count += 1\n        else:\n            odd_count += 1\n    return (even_count, odd_count)",
+    "def even_odd_count(num):\n    if num == 0:\n        return (1, 0)\n    n = abs(num)\n    even_count = 0\n    odd_count = 0\n    while n:\n        digit = n % 10\n        if digit & 1 == 0:\n            even_count += 1\n        else:\n            odd_count += 1\n        n //= 10\n    return (even_count, odd_count)"
+  ],
+  [
+    "def int_to_mini_roman(number):\n    roman_numerals = [\n        (1000, 'm'),\n        (900, 'cm'),\n        (500, 'd'),\n        (400, 'cd'),\n        (100, 'c'),\n        (90, 'xc'),\n        (50, 'l'),\n        (40, 'xl'),\n        (10, 'x'),\n        (9, 'ix'),\n        (5, 'v'),\n        (4, 'iv'),\n        (1, 'i')\n    ]\n    result = []\n    for value, symbol in roman_numerals:\n        count = number // value\n        result.append(symbol * count)\n        number %= value\n    return ''.join(result)",
+    "def int_to_mini_roman(number):\n    roman_map = [\n        (1000, 'm'),\n        (900, 'cm'),\n        (500, 'd'),\n        (400, 'cd'),\n        (100, 'c'),\n        (90, 'xc'),\n        (50, 'l'),\n        (40, 'xl'),\n        (10, 'x'),\n        (9, 'ix'),\n        (5, 'v'),\n        (4, 'iv'),\n        (1, 'i')\n    ]\n    result = []\n    for value, symbol in roman_map:\n        while number >= value:\n            result.append(symbol)\n            number -= value\n    return ''.join(result)",
+    "def int_to_mini_roman(number):\n    val_symbols = [\n        (1000, 'm'),\n        (900, 'cm'),\n        (500, 'd'),\n        (400, 'cd'),\n        (100, 'c'),\n        (90, 'xc'),\n        (50, 'l'),\n        (40, 'xl'),\n        (10, 'x'),\n        (9, 'ix'),\n        (5, 'v'),\n        (4, 'iv'),\n        (1, 'i')\n    ]\n    result = []\n    for value, symbol in val_symbols:\n        while number >= value:\n            result.append(symbol)\n            number -= value\n    return ''.join(result)"
+  ],
+  [
+    "def right_angle_triangle(a, b, c):\n    a2 = a * a\n    b2 = b * b\n    c2 = c * c\n    return (a2 + b2 == c2) or (a2 + c2 == b2) or (b2 + c2 == a2)",
+    "def right_angle_triangle(a, b, c):\n    squares = [a*a, b*b, c*c]\n    squares.sort()\n    return squares[0] + squares[1] == squares[2]",
+    "def right_angle_triangle(a, b, c):\n    a_sq = a * a\n    b_sq = b * b\n    c_sq = c * c\n    return (a_sq + b_sq == c_sq) or (a_sq + c_sq == b_sq) or (b_sq + c_sq == a_sq)"
+  ],
+  [
+    "def find_max(words):\n    return min(words, key=lambda w: (-len(set(w)), w))",
+    "def find_max(words):\n    best_word = None\n    max_unique = 0\n    for word in words:\n        if len(word) < max_unique:\n            continue\n        unique_count = len(set(word))\n        if best_word is None or unique_count > max_unique or (unique_count == max_unique and word < best_word):\n            best_word = word\n            max_unique = unique_count\n    return best_word",
+    "def find_max(words):\n    max_count = -1\n    max_word = None\n    for word in words:\n        unique_count = len(set(word))\n        if unique_count > max_count:\n            max_count = unique_count\n            max_word = word\n        elif unique_count == max_count:\n            if word < max_word:\n                max_word = word\n    return max_word"
+  ],
+  [
+    "def eat(number, need, remaining):\n    to_eat = min(need, remaining)\n    return [number + to_eat, remaining - to_eat]",
+    "def eat(number, need, remaining):\n    eaten = min(need, remaining)\n    return [number + eaten, remaining - eaten]",
+    "def eat(number, need, remaining):\n    eat_amount = min(need, remaining)\n    return [number + eat_amount, remaining - eat_amount]"
+  ],
+  [
+    "def do_algebra(operator, operand):\n    precedence = {\n        '**': 3,\n        '*': 2,\n        '//': 2,\n        '+': 1,\n        '-': 1\n    }\n    value_stack = [operand[0]]\n    operator_stack = []\n    \n    for i in range(len(operator)):\n        op = operator[i]\n        next_operand = operand[i+1]\n        \n        while operator_stack and precedence[operator_stack[-1]] > precedence[op]:\n            top_op = operator_stack.pop()\n            a = value_stack.pop()\n            b = value_stack.pop()\n            if top_op == '+':\n                result = b + a\n            elif top_op == '-':\n                result = b - a\n            elif top_op == '*':\n                result = b * a\n            elif top_op == '//':\n                result = b // a\n            elif top_op == '**':\n                result = b ** a\n            value_stack.append(result)\n        \n        operator_stack.append(op)\n        value_stack.append(next_operand)\n    \n    while operator_stack:\n        op = operator_stack.pop()\n        a = value_stack.pop()\n        b = value_stack.pop()\n        if op == '+':\n            result = b + a\n        elif op == '-':\n            result = b - a\n        elif op == '*':\n            result = b * a\n        elif op == '//':\n            result = b // a\n        elif op == '**':\n            result = b ** a\n        value_stack.append(result)\n    \n    return value_stack[0]",
+    "def do_algebra(operator, operand):\n    expr = str(operand[0])\n    for i in range(len(operator)):\n        expr += operator[i] + str(operand[i+1])\n    return eval(expr)",
+    "def do_algebra(operator, operand):\n    precedence = {\n        '**': 3,\n        '*': 2,\n        '//': 2,\n        '+': 1,\n        '-': 1\n    }\n    values = [operand[0]]\n    ops = []\n    for i in range(len(operator)):\n        op = operator[i]\n        next_operand = operand[i+1]\n        while ops and precedence.get(ops[-1], 0) > precedence.get(op, 0):\n            current_op = ops.pop()\n            val2 = values.pop()\n            val1 = values.pop()\n            if current_op == '+':\n                res = val1 + val2\n            elif current_op == '-':\n                res = val1 - val2\n            elif current_op == '*':\n                res = val1 * val2\n            elif current_op == '//':\n                res = val1 // val2\n            elif current_op == '**':\n                res = val1 ** val2\n            values.append(res)\n        ops.append(op)\n        values.append(next_operand)\n    while ops:\n        current_op = ops.pop()\n        val2 = values.pop()\n        val1 = values.pop()\n        if current_op == '+':\n            res = val1 + val2\n        elif current_op == '-':\n            res = val1 - val2\n        elif current_op == '*':\n            res = val1 * val2\n        elif current_op == '//':\n            res = val1 // val2\n        elif current_op == '**':\n            res = val1 ** val2\n        values.append(res)\n    return values[0]"
+  ],
+  [
+    "def solve(s):\n    if not any(c.isalpha() for c in s):\n        return s[::-1]\n    return s.swapcase()",
+    "def solve(s):\n    if not any(c.isalpha() for c in s):\n        return s[::-1]\n    return s.swapcase()",
+    "def solve(s):\n    if not any(c.isalpha() for c in s):\n        return s[::-1]\n    return ''.join(c.swapcase() if c.isalpha() else c for c in s)"
+  ],
+  [
+    "import hashlib\n\ndef string_to_md5(text):\n    if not text:\n        return None\n    return hashlib.md5(text.encode()).hexdigest()",
+    "import hashlib\n\ndef string_to_md5(text):\n    if not text:\n        return None\n    return hashlib.md5(text.encode()).hexdigest()",
+    "import hashlib\n\ndef string_to_md5(text):\n    if not text:\n        return None\n    return hashlib.md5(text.encode()).hexdigest()"
+  ],
+  [
+    "def generate_integers(a, b):\n    low = min(a, b)\n    high = max(a, b)\n    return [x for x in (2, 4, 6, 8) if low <= x <= high]",
+    "def generate_integers(a, b):\n    low = min(a, b)\n    high = max(a, b)\n    return [x for x in (2, 4, 6, 8) if low <= x <= high]",
+    "def generate_integers(a, b):\n    low = min(a, b)\n    high = max(a, b)\n    return [x for x in [2, 4, 6, 8] if low <= x <= high]"
+  ]
+]
